@@ -80,3 +80,25 @@ score.
 
 **Carried by:** `src/inventory.py`, the `ROWS` and `ERAS` constants;
 `src/validate.py` fails if the rows on disk are not exactly those constants.
+
+## D3 · Cells link to the artifact on GitHub, at the sibling's default branch
+
+Every filled cell on the page is a link to
+`https://github.com/RobbinsAnalytics/<remote>/blob/<default_branch>/<path>`,
+or `tree/` where the path is a directory (its cell carries a trailing slash).
+Both `remote` and `default_branch` are read from the sibling by
+`src/inventory.py` and frozen in `data/builds.json`, because four of the nine
+remotes differ from the local directory name (REMOTE-CONVENTION.md's split
+pattern) and one default branch is `master`. Data belongs in the data file,
+not in the page builder.
+
+Nothing links to a local path, and nothing links to `cascadia-estate`, which
+is private. Where a sibling relays its panel record from
+`cascadia-estate/panels/` into its own `chart-review.md`, the cell links to
+that chart review, as Part 1 recorded.
+
+*Counterfactual:* a builder that derived the remote from the key would be right
+for five rows and wrong for four, silently, until the link check ran.
+
+**Carried by:** `src/inventory.py` (the two fields), `src/validate.py` (the
+convention check), `src/build_page.py` (the URL form).
