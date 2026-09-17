@@ -1,6 +1,6 @@
 # Build by Build: spec
 
-*v0.1 · 2026-09-16 · Written from the Build by Build Cowork project. Durable: says what must be true when each part is done, carries nothing perishable. Prompts are generated from this, one part at a time, after the previous part reports (SESSION-RULES rule 9). Aaron approved the ideation this spec encodes on 2026-09-16.*
+*v0.2 · 2026-09-16 · v0.2 removes the retired title from the Names table, which v0.1 spelled out in the sentence retiring it; Part 0's own final check caught it. Written from the Build by Build Cowork project. Durable: says what must be true when each part is done, carries nothing perishable. Prompts are generated from this, one part at a time, after the previous part reports (SESSION-RULES rule 9). Aaron approved the ideation this spec encodes on 2026-09-16.*
 
 ---
 
@@ -23,7 +23,7 @@
 | Remote | `https://github.com/RobbinsAnalytics/cascadia-build-by-build.git` |
 | Published page | `https://www.robbinsanalytics.com/cascadia-build-by-build/` |
 | Site case study | `projects/cascadia-build-by-build.qmd` in `RobbinsAnalytics.github.io` |
-| Former working title | Estate Evolution. Retired. Must not appear in the repo, the page or the site. |
+| Former working title | Retired 2026-09-16 and not spelled here, so that no copy of this spec carries it. It must not appear in the repo, the page or the site. The Build by Build Cowork project holds the record of what it was and why it went. |
 
 ## Standing decisions (Aaron's, 2026-09-16)
 
