@@ -1,0 +1,54 @@
+{
+  "declared_breakpoints": [
+    700
+  ],
+  "widths_rendered": [
+    320,
+    741,
+    742,
+    1040
+  ],
+  "crossings": [
+    {
+      "chart": "matrix",
+      "breakpoint": 700,
+      "below": 741,
+      "above": 742
+    }
+  ],
+  "charts": [
+    "matrix"
+  ],
+  "narrowest": 320,
+  "design": 1040,
+  "matrix_state_by_width": {
+    "320": {
+      "host": 278,
+      "narrow": true,
+      "table": 494,
+      "wrapper": 266,
+      "scrolls": true
+    },
+    "741": {
+      "host": 699,
+      "narrow": true,
+      "table": 494,
+      "wrapper": 687,
+      "scrolls": false
+    },
+    "742": {
+      "host": 700,
+      "narrow": false,
+      "table": 964,
+      "wrapper": 676,
+      "scrolls": true
+    },
+    "1040": {
+      "host": 998,
+      "narrow": false,
+      "table": 964,
+      "wrapper": 974,
+      "scrolls": false
+    }
+  }
+}
