@@ -6,25 +6,25 @@ One chart: the test-surface matrix, an HTML table. Data as read on
 2026-09-16, frozen at `d967ff5`.*
 
 ```
-CASCADIA CHART REVIEW v2.8 — docs/index.html (one chart, #matrix) — 2026-09-16
+CASCADIA CHART REVIEW v2.8: docs/index.html (one chart, #matrix): 2026-09-16
 Class: detailed                    Quadrant: explanatory
 Relationship: change over time (test surfaces accumulate across nine builds
               ordered by first commit; the rows are the time axis)
 States reached: default only; the page has no reader controls, so the default
               state is the only state (Rule 6.11 N/A)
-Widths reached (K6): 320 · 741 · 742 · 1040 — derived by src/render_charts.py
+Widths reached (K6): 320 · 741 · 742 · 1040: derived by src/render_charts.py
               from window.CASCADIA_BREAKPOINTS = [700]; the matrix host
               crosses 700 between viewports 741 and 742
               (docs/renders/k6-ladder.json). 320 is the narrowest supported
               width; 1040 the design width.
-Once per publish (K7, K8): K7 PASS — every asset URL carries a content hash
+Once per publish (K7, K8): K7 PASS: every asset URL carries a content hash
               (cascadia.css?v=fc83ff023c, page.js?v=1af15cc9cc,
               favicon.svg?v=9f2fe5d980; no ECharts, no theme script ships).
-              K8 PASS on presence — og:title, og:description, og:image,
+              K8 PASS on presence: og:title, og:description, og:image,
               og:url, twitter:card, twitter:image, favicon linked; the
               og:image URL is absolute and names a thumbnail the site-side
               session has not yet produced (see Owed).
-Reading panel (7.4): NOT RUN — renders handed to the Estate project; fatal
+Reading panel (7.4): NOT RUN: renders handed to the Estate project; fatal
               under 7.1 until the record returns and is dispositioned here.
 ```
 
