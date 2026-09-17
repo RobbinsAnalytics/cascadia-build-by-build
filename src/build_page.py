@@ -8,8 +8,9 @@ no figure is typed there either (K2). docs/index.html is generated and never
 edited by hand.
 
 The one chart is an HTML table, not a canvas: the matrix is categorical, the
-table is its own data layer (Rule 5.1), the caption carries the finding
-(Rule 3.1) and a description paragraph carries the shape. No ECharts ships.
+table is its own data layer (Rule 5.1), a heading above it carries the
+finding (Rule 3.1) and a description paragraph carries the shape. No ECharts
+ships.
 
 The page reads governance/freeze.toml for the as-of date and the freeze
 commit only, so the provenance strip can name the freeze the numbers come
@@ -601,7 +602,7 @@ def main() -> int:
         out = out.replace(f"@@{k}@@", v)
     if "@@" in out:
         raise SystemExit("unsubstituted token in the template")
-    if "-" in out:
+    if "—" in out:
         raise SystemExit("an em dash reached the page")
     DOCS.mkdir(exist_ok=True)
     (DOCS / "index.html").write_text(out, encoding="utf-8", newline="\n")
