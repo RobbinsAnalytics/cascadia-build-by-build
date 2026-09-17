@@ -13,12 +13,13 @@ Tokens the builder understands, and fails the build on if unknown:
     {first:<surface>}      the name of the first build to carry that surface,
                            linked
 
-Two lines are Aaron's and ship in his words, not these: LEDE_AARON and
-CLOSING_AARON. They are marked [AARON] and quoted in the Part 2 report for
-his rewrite. House style: no em dashes; US spelling.
+Two lines were drafted for Aaron's rewrite, LEDE_AARON and CLOSING_AARON,
+quoted in the Part 2 report; he read the page and accepted them on 2026-09-17.
+House style: no em dashes; US spelling.
 """
 
-# [AARON] The lede's first sentence. Draft for Aaron's rewrite.
+# The lede's first sentence. Drafted by the build session; Aaron read the page
+# with it on 2026-09-17 and accepted it as it stands.
 LEDE_AARON = ("Nine Cascadia modules, built one after another over four months, and the "
               "tests each one could carry when it shipped.")
 
@@ -191,7 +192,8 @@ MODULE_LINES = {
         "golden fixture written first, and invoices reconciled to the month."),
 }
 
-# [AARON] The walk's closing line. Draft for Aaron's rewrite. The page stops here.
+# The walk's closing line. Drafted by the build session; accepted by Aaron on
+# 2026-09-17 with the lede. The page stops here.
 CLOSING_AARON = "From here the walk is a conversation. Pick a module; its row is where it starts."
 
 DISCLOSURE = (

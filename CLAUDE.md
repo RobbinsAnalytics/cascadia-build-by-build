@@ -98,9 +98,13 @@ The renderer derives the K6 ladder from `window.CASCADIA_BREAKPOINTS` in
 saying so; the favicon is the site's. No ECharts ships: the one chart is an
 HTML table, and the chart review says why under 0.3.
 
-**Not yet published.** The page ships only after the reading panel's record is
-dispositioned in `governance/chart-review.md`. Enabling Pages and publishing
-is Part 2b.
+**Published by GitHub Pages from `main`, folder `/docs`**, the same way as
+Revenue Assurance and Fee Examiner, at
+`https://www.robbinsanalytics.com/cascadia-build-by-build/`. The site
+repository holds no copy of this page; it holds the case study and the links
+(Part 3). A merge to `main` is therefore a publish, and `main` stays
+publishable: the panel record is dispositioned in
+`governance/chart-review.md` before anything reaches it.
 
 ## Committing
 
