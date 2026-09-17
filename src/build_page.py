@@ -69,6 +69,7 @@ BAND_ABBR = {"Data": "D", "Numbers": "N", "Presentation": "P", "Operation": "O"}
 ERA_SHY = {"Enterprise-shaped": "Enter&shy;prise-shaped", "Frozen and validated": "Frozen and vali&shy;dated",
            "Reviewed and registered": "Re&shy;viewed and regis&shy;tered", "Operated": "Oper&shy;ated",
            "Re-derived": "Re-derived"}
+BAND_START = {cols[0] for cols in list(BANDS.values())[1:]}
 MONTHS = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
 WORDS = ["zero", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine",
          "ten", "eleven", "twelve", "thirteen", "fourteen"]
@@ -217,7 +218,8 @@ def matrix_table(builds: list[dict], standard: list[dict], F: dict, as_of: str) 
         raise SystemExit("the primary annotation's fact is not true of the data")
     if F["per"][fin]["firsts"] != max(p["firsts"] for p in F["per"].values()):
         raise SystemExit("the secondary annotation's fact is not true of the data")
-    ann_primary = T.ANNOTATION_PRIMARY
+    ann_primary = T.ANNOTATION_PRIMARY.format(col=WORDS[SURFACES.index("golden_fixture") + 1],
+                                              n=WORDS[len(SURFACES)])
     ann_secondary = T.ANNOTATION_SECONDARY.format(firsts=WORDS[F["per"][fin]["firsts"]])
     for a in (ann_primary, ann_secondary):
         if len(a.split()) > 14:
@@ -254,8 +256,13 @@ def matrix_table(builds: list[dict], standard: list[dict], F: dict, as_of: str) 
         while j < len(seq) and seq[j][0] == group:
             j += 1
         span = j - i
+        # Two representations of the era label, one visible at a time: a
+        # rowspan column at the design width, a group row below the breakpoint
+        # (panel finding 7: the narrow column hyphenated the labels).
         era_th = f'<th scope="rowgroup" class="era" rowspan="{span}"><span>{ERA_SHY.get(group, esc(group))}</span></th>'
-        body += seq[i][1].replace("<tr class=\"build\">", f"<tr class=\"build\">{era_th}", 1)
+        era_row = (f'<tr class="era-row"><th scope="rowgroup" colspan="{ncols - 1}">'
+                   f'<div class="stick">{esc(group)}</div></th></tr>\n')
+        body += era_row + seq[i][1].replace("<tr class=\"build\">", f"<tr class=\"build\">{era_th}", 1)
         for k in range(i + 1, j):
             body += seq[k][1]
         i = j
@@ -265,10 +272,14 @@ def matrix_table(builds: list[dict], standard: list[dict], F: dict, as_of: str) 
         f'<span class="name">{esc(band)}</span><span class="abbr" aria-hidden="true">{BAND_ABBR[band]}</span></th>'
         for band, cols in BANDS.items())
     head_surfaces = "".join(
-        f'<th scope="col" class="surface" id="col-{s}"><span class="num">{i + 1}</span>'
-        f'<span class="name">{SURFACE_NAMES[s]}</span></th>'
+        f'<th scope="col" class="surface{" band-start" if s in BAND_START else ""}" id="col-{s}">'
+        f'<span class="num">{i + 1}</span><span class="name">{SURFACE_NAMES[s]}</span></th>'
         for i, s in enumerate(SURFACES))
-    subtitle = T.MATRIX_SUBTITLE.format(as_of=as_of)
+    # The column numbers repeat under the last row (panel finding 3: a lookup
+    # from row nine to the header was a long way).
+    foot = "".join(f'<td class="footnum{" band-start" if s in BAND_START else ""}" aria-hidden="true">{i + 1}</td>'
+                   for i, s in enumerate(SURFACES))
+    subtitle = T.MATRIX_SUBTITLE.format(as_of=as_of, n=WORDS[len(SURFACES)])
     table = f'''<table class="matrix" aria-labelledby="matrix-title" aria-describedby="matrix-sub matrix-summary">
 <thead>
 <tr class="bands"><th scope="col" rowspan="2" class="era-h">Era</th><th scope="col" rowspan="2" class="build-h">Build</th>{head_bands}</tr>
@@ -276,6 +287,7 @@ def matrix_table(builds: list[dict], standard: list[dict], F: dict, as_of: str) 
 </thead>
 <tbody>
 {body}</tbody>
+<tfoot><tr class="foot"><td class="era-h"></td><td class="build-h"></td>{foot}</tr></tfoot>
 </table>'''
     return table, {"lanes": {str(k): [e["version"] for e in v] for k, v in lanes.items()},
                    "annotations": [ann_primary, ann_secondary], "subtitle": subtitle}
@@ -286,14 +298,15 @@ def build_row(r: dict, F: dict) -> str:
     cells = ""
     for s in SURFACES:
         path = r["surfaces"][s]
+        bs = " band-start" if s in BAND_START else ""
         if not path:
-            cells += '<td class="cell empty"></td>'
+            cells += f'<td class="cell empty{bs}"></td>'
             continue
         is_first = F["first"][s] == r["key"]
         label = (f"{plain(SURFACE_NAMES[s])}: {path} in {r['remote']}"
                  + (", the first build to carry it" if is_first else ""))
         cls = "mark first" if is_first else "mark"
-        cells += (f'<td class="cell"><a class="{cls}" href="{esc(cell_url(r, path))}" '
+        cells += (f'<td class="cell{bs}"><a class="{cls}" href="{esc(cell_url(r, path))}" '
                   f'title="{esc(path)}" aria-label="{esc(label)}"><span aria-hidden="true"></span></a></td>')
     head = (f'<th scope="row" class="build-label"><span class="ord" aria-hidden="true">{p["index"]}</span>'
             f'{link(r)}<span class="meta">{esc(r["stack"])} <span class="dot">·</span> <span class="when">{esc(month(r["first_commit"]))}</span></span></th>')
@@ -326,7 +339,7 @@ def description(builds: list[dict], standard: list[dict], F: dict) -> str:
 # the page
 # ---------------------------------------------------------------------------
 
-T_TITLE = "Two ways to check a number at build one. Fourteen by build nine."
+T_TITLE = "Two ways to check a number at build one. Fourteen had appeared by build nine."
 
 
 def check_title(builds: list[dict], F: dict) -> None:
@@ -428,6 +441,21 @@ TEMPLATE = """<!DOCTYPE html>
                                   text-align: center; font-weight: 400; hyphens: manual; overflow-wrap: normal;
                                   padding: 6px 2px 4px; }
   table.matrix thead th.surface .num { display: block; font-weight: 600; color: var(--ink); }
+  /* Vertical rules so a mark in row nine can be followed up to its column
+     (panel finding 9); the band boundaries carry a darker rule. */
+  table.matrix thead th.surface, table.matrix td.cell, table.matrix tfoot td.footnum {
+    border-left: 1px solid var(--grid); }
+  table.matrix thead th.surface.band-start, table.matrix td.cell.band-start,
+  table.matrix tfoot td.footnum.band-start { border-left: 1px solid var(--ink-2); }
+  table.matrix tfoot td { background: var(--surface); border-top: 1px solid var(--ink-2);
+                          border-bottom: 0; padding: 3px 0; }
+  table.matrix tfoot td.footnum { text-align: center; font-weight: 600; color: var(--ink-2); }
+  tr.era-row { display: none; }
+  tr.era-row th { text-align: left; font: 600 12px/1.4 var(--serif); color: var(--ink-2);
+                  background: var(--page); padding: 6px 6px 2px; border-bottom: 1px solid var(--grid); }
+  .scroll-hint { display: none; order: 0; font: 12px/1.5 var(--sans); color: var(--ink-s1);
+                 margin: 0 2px 6px; }
+  #matrix.hint > .scroll-hint { display: block; }
   table.matrix thead th .abbr { display: none; }
   table.matrix th.era-h, table.matrix th.era { position: sticky; left: 0; z-index: 2;
                                                width: var(--era-w); min-width: var(--era-w); max-width: var(--era-w); }
@@ -456,12 +484,14 @@ TEMPLATE = """<!DOCTYPE html>
 
   .stick { position: sticky; left: 0; box-sizing: border-box;
            max-width: calc(var(--wrap-w, 100%) - var(--era-w) - 16px); }
-  tr.lane td { background: var(--page); color: var(--ink-2); font: 12px/1.5 var(--sans); padding: 2px 6px;
+  /* The standard's lane: subordinate to the build rows (panel finding 8), and
+     its tick is a bar, not a square (finding 10). */
+  tr.lane td { background: var(--page); color: var(--muted); font: 12px/1.4 var(--sans); padding: 1px 6px;
                border-bottom: 1px solid var(--grid); }
-  tr.lane .lane-label { font-weight: 600; margin-right: 6px; color: var(--ink-2); }
+  tr.lane .lane-label { margin-right: 6px; color: var(--muted); font-variant: small-caps; letter-spacing: 0.03em; }
   tr.lane .lane-mark { display: inline-block; margin-right: 10px; white-space: nowrap; }
-  tr.lane .lane-tick { display: inline-block; width: 8px; height: 8px; background: var(--s2);
-                       margin-right: 4px; vertical-align: -1px; }
+  tr.lane .lane-tick { display: inline-block; width: 3px; height: 11px; background: var(--s2);
+                       margin-right: 5px; vertical-align: -2px; }
   tr.lane .lane-date { color: var(--muted); }
   tr.annotation td { background: var(--surface); padding: 3px 6px 6px; border-bottom: 1px solid var(--grid); }
   tr.annotation.primary td { font: 600 13px/1.5 var(--serif); color: var(--ink-s1); }
@@ -477,7 +507,7 @@ TEMPLATE = """<!DOCTYPE html>
   .key .legend .sq { display: inline-block; width: 10px; height: 10px; background: var(--ink-2); vertical-align: -1px; }
   .key .legend .di { display: inline-block; width: 13px; height: 13px; background: var(--s1); vertical-align: -2px;
                      clip-path: polygon(50% 0, 100% 50%, 50% 100%, 0 50%); }
-  .key .legend .lt { display: inline-block; width: 8px; height: 8px; background: var(--s2); vertical-align: -1px; }
+  .key .legend .lt { display: inline-block; width: 3px; height: 11px; background: var(--s2); vertical-align: -2px; }
 
   /* Rule 4.2: bottom-left, Evergreen tick, three segments, 11 px Slate moss. */
   .cascadia-provenance { display: flex; align-items: baseline; gap: 7px; margin: 8px 0 0 2px;
@@ -485,18 +515,25 @@ TEMPLATE = """<!DOCTYPE html>
   .cascadia-provenance .tick { display: inline-block; width: 3px; height: 11px; background: var(--s1);
                                align-self: center; flex: none; }
 
-  /* Below the declared breakpoint (host < 700 px): numbers only in the header,
-     band abbreviations, narrower sticky columns. Nothing rotates. */
-  #matrix.narrow table.matrix { --era-w: 54px; --build-w: 104px; --cell-w: 24px; }
-  #matrix.narrow table.matrix td.cell { padding: 2px 0; }
-  #matrix.narrow table.matrix th.era, #matrix.narrow table.matrix th.build-label { padding: 4px 2px; }
+  /* Below the declared breakpoint (host < 990 px, where the full-name header
+     no longer fits): numbers only in the header with the key moved above the
+     table, band abbreviations, the era as a group row instead of a sticky
+     column, one narrower sticky column. Nothing rotates. */
+  #matrix.narrow table.matrix { --era-w: 0px; --build-w: 116px; --cell-w: 48px; }
+  #matrix.narrow table.matrix th.build-label { padding: 4px 3px; left: 0; }
+  #matrix.narrow table.matrix .build-h { left: 0; }
+  #matrix.narrow table.matrix .era-h, #matrix.narrow table.matrix th.era { display: none; }
+  #matrix.narrow tr.era-row { display: table-row; }
   #matrix.narrow.chart-card { padding-left: 6px; padding-right: 6px; }
-  #matrix.narrow table.matrix thead th.surface .name { display: none; }
-  #matrix.narrow table.matrix thead th.band .name { display: none; }
-  #matrix.narrow table.matrix thead th.band .abbr { display: inline; }
+  /* Below the second breakpoint (host < 830 px) the names no longer fit either. */
+  #matrix.numbers table.matrix { --cell-w: 24px; }
+  #matrix.numbers table.matrix td.cell { padding: 2px 0; }
+  #matrix.numbers > .key { order: 0; margin: 0 2px 8px; }
+  #matrix.numbers table.matrix thead th.surface .name { display: none; }
+  #matrix.numbers table.matrix thead th.band .name { display: none; }
+  #matrix.numbers table.matrix thead th.band .abbr { display: inline; }
   #matrix.narrow table.matrix th.build-label a { font-size: 12px; }
   #matrix.narrow table.matrix th.build-label .meta { font-size: 12px; line-height: 1.3; }
-  #matrix.narrow table.matrix th.era { font-size: 12px; }
   #matrix.narrow a.mark > span { width: 12px; height: 12px; }
   #matrix.narrow a.mark.first > span { width: 14px; height: 14px; }
   #matrix.narrow > .finding { font-size: 17px; }
@@ -536,6 +573,7 @@ TEMPLATE = """<!DOCTYPE html>
 <div class="chart-card" id="matrix">
   <h3 class="finding" id="matrix-title">@@title@@</h3>
   <p class="sub" id="matrix-sub">@@subtitle@@</p>
+  <p class="scroll-hint">@@hint@@</p>
   <p class="chart-summary" id="matrix-summary">@@summary@@</p>
   <div class="table-scroll" tabindex="0" aria-label="Scrollable matrix">
 @@table@@
@@ -556,7 +594,7 @@ TEMPLATE = """<!DOCTYPE html>
 <h3>About this page</h3>
 <p>@@disclosure@@</p>
 <p>Source, the inventory script, the surface definitions and the two data files:
-<a href="@@repo_url@@">github.com/RobbinsAnalytics/cascadia-build-by-build</a>. Inventory read @@as_of@@; data frozen at commit <code>@@freeze_short@@</code>.</p>
+<a href="@@repo_url@@">github.com/RobbinsAnalytics/cascadia-build-by-build</a>. How a cell is filled or left empty is a written rule per column, in <a href="@@repo_url@@/blob/main/governance/surfaces.md">governance/surfaces.md</a>. Inventory read @@as_of@@; data frozen at commit <code>@@freeze_short@@</code>.</p>
 </div>
 
 </div>
@@ -594,6 +632,7 @@ def main() -> int:
         "v_favicon": asset_v("favicon.svg"), "v_css": asset_v("cascadia.css"), "v_page": asset_v("page.js"),
         "lede": lede, "summary": esc(summary), "table": table, "key": key_html(),
         "title": esc(T_TITLE), "subtitle": esc(meta["subtitle"]),
+        "hint": esc(T.SCROLL_HINT.format(n=WORDS[len(SURFACES)])),
         "prov1": esc(prov[0]), "prov2": esc(prov[1]), "prov3": esc(prov[2]),
         "eras": eras_html(builds, F), "walk": walk_html(builds, F),
         "disclosure": esc(T.DISCLOSURE), "repo_url": REPO_URL, "as_of": esc(as_of),

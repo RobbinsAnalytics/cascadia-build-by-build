@@ -27,21 +27,26 @@ LEDE_SECOND = ("Every filled cell links to the file on GitHub that it names. An 
 
 # The matrix caption's subtitle, in secondary ink under the finding. The
 # as-of date and the freeze are filled by the builder.
-MATRIX_SUBTITLE = ("Nine module repositories by fourteen test surfaces, read from disk on "
-                   "{as_of}. Rows in first-commit order, grouped by era. A square marks a "
-                   "surface the build carries and links to the file; a diamond marks the "
-                   "first build to carry it. Count the diamonds to check the title.")
+MATRIX_SUBTITLE = ("Nine portfolio modules (independent projects, not client work) by {n} "
+                   "test surfaces, read from disk on {as_of}. Rows in first-commit order, "
+                   "grouped by era. A square marks a surface the build carries and links to "
+                   "the file; a diamond marks the first build to carry it, so there are {n} "
+                   "diamonds in the table, one per surface. Count them to check the title.")
+
+# Shown only where the table is wider than its screen and scrolls sideways.
+SCROLL_HINT = ("The table is wider than this screen and scrolls sideways. All {n} columns "
+               "are there.")
 
 # Two annotations (Rule 3.4). The primary sits under the last row, at the
 # mark the title's second number depends on; the secondary under the row where
 # the most surfaces appear at once. Each is at most fourteen words. The builder
 # fills the figures and asserts the facts they state.
-ANNOTATION_PRIMARY = "Build nine: the golden fixture is the fourteenth surface. Count the diamonds."
+ANNOTATION_PRIMARY = "Build nine: the golden fixture (column {col}) is the last of {n} to appear."
 ANNOTATION_SECONDARY = "Build four, the first Python build: {firsts} surfaces appear at once."
 
 # The standard's lane.
 LANE_UNDATED = "v1.0, v2.0 and v2.1: undated, before the standard had a repository."
-LANE_LABEL = "Design standard, VIZ-PRINCIPLES"
+LANE_LABEL = "Design standard VIZ-PRINCIPLES"
 
 # Five eras, three lines each: what could be tested, what had to be trusted,
 # what the next era brought under test. Written from the matrix.

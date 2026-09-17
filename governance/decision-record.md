@@ -124,6 +124,13 @@ every cell a link, would not catch it.
 **Carried by:** `src/build_page.py` (`T_TITLE`, `check_title()`),
 `governance/chart-review.md` 3.2.
 
+*Amended 2026-09-17, after the reading panel.* Three of four seats read
+"Fourteen by build nine" as build nine's own score and counted its row (ten).
+The second clause now reads "Fourteen had appeared by build nine", the same
+shape with the cumulative sense carried by the verb, and the subtitle says
+there are fourteen diamonds in the table, one per surface. The numbers and
+the build's assertion of them are unchanged.
+
 ## D5 · The matrix is an HTML table, not a canvas
 
 The matrix is categorical presence, not quantity: a cell holds a path or

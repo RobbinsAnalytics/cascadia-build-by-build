@@ -8,7 +8,7 @@ surface first appeared, and what every filled cell links to on disk. It has no
 data of its own. Its source is the other nine module repositories, all of
 them read-only, and nothing here invents a score.
 
-**Status: Part 2. Page built and reviewed. Not published; awaiting the reading panel.**
+**Status: Part 2. Page built, panelled and dispositioned. Not published; awaiting Aaron's two lines and Part 2b.**
 
 ## Repository and folder names match
 

@@ -1,9 +1,10 @@
 # Chart review: Cascadia Build by Build, the Part 2 page
 
-*Owner: Aaron Robbins. Opened 2026-09-16 by the build session. Companion to
-`VIZ-PRINCIPLES.md` v2.8 and `CHART-REVIEW.md` v2.8 in `cascadia-standards`.
-One chart: the test-surface matrix, an HTML table. Data as read on
-2026-09-16, frozen at `d967ff5`.*
+*Owner: Aaron Robbins. Opened 2026-09-16 by the build session; panel record
+added and dispositioned 2026-09-17, Round 1 changes applied the same day.
+Companion to `VIZ-PRINCIPLES.md` v2.8 and `CHART-REVIEW.md` v2.8 in
+`cascadia-standards`. One chart: the test-surface matrix, an HTML table. Data
+as read on 2026-09-16, frozen at `d967ff5`.*
 
 ```
 CASCADIA CHART REVIEW v2.8: docs/index.html (one chart, #matrix): 2026-09-16
@@ -12,20 +13,26 @@ Relationship: change over time (test surfaces accumulate across nine builds
               ordered by first commit; the rows are the time axis)
 States reached: default only; the page has no reader controls, so the default
               state is the only state (Rule 6.11 N/A)
-Widths reached (K6): 320 · 741 · 742 · 1040: derived by src/render_charts.py
-              from window.CASCADIA_BREAKPOINTS = [700]; the matrix host
-              crosses 700 between viewports 741 and 742
+Widths reached (K6): 320 · 519 · 520 · 871 · 872 · 1031 · 1032 · 1040: derived
+              by src/render_charts.py from window.CASCADIA_BREAKPOINTS =
+              [478, 830, 990]; the matrix host crosses 478 between viewports
+              519/520, 830 between 871/872 and 990 between 1031/1032
               (docs/renders/k6-ladder.json). 320 is the narrowest supported
-              width; 1040 the design width.
+              width; 1040 the design width. (The first build declared one
+              breakpoint at 700 and rendered 320/741/742/1040; the panel read
+              those, and Round 1 moved and added breakpoints, see section 5.)
 Once per publish (K7, K8): K7 PASS: every asset URL carries a content hash
-              (cascadia.css?v=fc83ff023c, page.js?v=1af15cc9cc,
+              (cascadia.css?v=fc83ff023c, page.js?v=7ace4ce448,
               favicon.svg?v=9f2fe5d980; no ECharts, no theme script ships).
               K8 PASS on presence: og:title, og:description, og:image,
               og:url, twitter:card, twitter:image, favicon linked; the
               og:image URL is absolute and names a thumbnail the site-side
               session has not yet produced (see Owed).
-Reading panel (7.4): NOT RUN: renders handed to the Estate project; fatal
-              under 7.1 until the record returns and is dispositioned here.
+Reading panel (7.4): RUN 2026-09-17, Cowork side, simulated, 4 seats, four
+              states (320, 741, 742, 1040 of the first build's ladder); the
+              record is section 4, every finding dispositioned in section 5,
+              Round 1 changes in section 6. Blindness measured contaminated
+              by the panel itself (section 4, transport certification).
 ```
 
 ## 0 · Layer 0, the brief (Rules 0.1 to 0.3)
@@ -70,44 +77,45 @@ the four widths above. Renders are in `docs/renders/`: `matrix-<w>.png` and
 | 2.3.3 / 2.3.4 mark size | 12 px squares, 15 px diamonds (14 px below the breakpoint), 8 px lane ticks: solid fills validated at block size; the 8 px tick sits between the point and block classes and carries a text label beside it, so nothing rests on its hue |
 | 2.3.5 at most four categories | three (square, diamond, lane tick) |
 | 2.3.6 data geometry at or above 3:1 | PASS: Slate moss 5.82:1, Evergreen 5.18:1, Glacier 3.55:1 on Paper; no Rain |
-| 2.4 gridlines | the table's 1 px Mist row rules are structure, not gridlines; no vertical rules except the two that separate the sticky label columns from the cells. Recorded as PASS with that reading |
+| 2.4 gridlines | the table's 1 px Mist row and column rules are structure, not gridlines; the column rules are earned (panel finding 9: a reader tracked a mark up to its column with nothing to follow) and the band boundaries carry a darker rule. Horizontal rules only between rows, vertical only between columns, all 1 px, behind the marks |
 | 2.5 no decoration | PASS: flat fills, no shadow, no gradient, no icon in the plot |
 | 2.6 part-to-whole | N/A |
 | 2.7 sort | rows in first-commit order and columns in the spec's band order, both inherently ordered: PASS (exception) |
 | 2.8 horizontal text | PASS: header names break at declared soft hyphens; nothing rotates at any width |
 | 2.9 rounded to the decision | counts only; dates ISO in the lane per house style |
 | 3.1 finding title at top | PASS: an `<h3>` above the table, the table `aria-labelledby` it. Not a `<caption>`: made `display: block` and sticky inside the scroll wrapper, a caption collapsed to the first column's width and rendered below the header (§2, #1); left as `table-caption` it scrolls away with the table, which Rule 5.1's own narrow-table clause warns of |
-| 3.2 title readable from the plot | "two ways at build one": two diamonds in row one. "fourteen by build nine": fourteen diamonds in the table, the last in row nine. Both are counted from marks, and the subtitle says to count the diamonds. No computed-aggregate exception is needed; the description carries the counts as well |
+| 3.2 title readable from the plot | "two ways at build one": two diamonds in row one. "fourteen had appeared by build nine": fourteen diamonds in the table, the last in row nine. Both are counted from marks; the subtitle says there are fourteen diamonds, one per surface, and to count them. Reworded in Round 1 (panel finding 5: "by build nine" read as row nine's score). No computed-aggregate exception is needed; the description carries the counts as well |
 | 3.3 focus treatment | the diamonds are the saturated series (Evergreen) and are the series the title talks about; the squares are context in Slate moss, above 3:1 and named by the key, not Rain; the primary annotation is in Evergreen ink, matched to the diamonds |
-| 3.4 annotation at the mark, one dominant | primary under row nine, the mark the second number depends on, 12 words; secondary under row four where the most surfaces appear at once, 11 words, smaller and in secondary ink. Linkage is adjacency (each in its own row directly beneath its mark) plus colour. Both figures in the annotations are computed and asserted in `build_page.py` |
+| 3.4 annotation at the mark, one dominant | primary under row nine, the mark the second number depends on, 14 words, naming the column (panel finding 6); secondary under row four where the most surfaces appear at once, 11 words, smaller and in secondary ink. Linkage is adjacency (each in its own row directly beneath its mark) plus colour. Both figures in the annotations are computed and asserted in `build_page.py` |
 | K3 no annotation over a mark | PASS at all four widths: each annotation is its own row; nothing is drawn over a cell |
 | 3.5 arrangement | rows adjacent in build order and grouped by era; columns grouped by band; the comparison the title affords (row one against the whole column of diamonds) is a vertical scan down one table |
-| 3.6 direct labels | every column carries its name in the header at and above the breakpoint and its number below it, with the number-to-name mapping declared in the key at every width (Rule 5.5's declared abbreviation, not a legend that replaces a label); every row carries its name, stack and month; every mark carries an accessible name naming surface, path, repository and first-ness. The key's mark meanings (square, diamond, tick) cannot be written in each cell and are the one legend on the page |
+| 3.6 direct labels | every column carries its name in the header down to a host width of 830 px and its number below that, with the number-to-name mapping declared in the key at every width and the numbers repeated under the last row (Rule 5.5's declared abbreviation, not a legend that replaces a label); every row carries its name, stack and month; every mark carries an accessible name naming surface, path, repository and first-ness. The key's mark meanings (square, diamond, tick) cannot be written in each cell and are the one legend on the page |
 | 4.1 holes | an empty cell is an empty cell, declared in the subtitle, the key and the description; nothing is zero-filled; the three undated standard versions are listed as undated in the lane's first row, not placed |
 | 4.2 strip | bottom-left of the card, Evergreen tick, three segments, 12 px Slate moss: source, read date with the freeze and the standard's commit, flags |
 | K5 rendered segment count | 3 at all four widths (`render_charts.py` counts the render) |
 | 4.3 travels alone | the subtitle carries how to check the title; the key carries every meaning; the strip carries the as-of, the freeze and the undated note. A screenshot of the card is complete |
 | 4.5 uncertainty | N/A: every cell is a file that exists or does not |
-| 5.1 access layers | summary first in the DOM (rendered under the table); the chart is the table, so layer 2 is the chart itself; layer 3: native table semantics with row and column headers, and every mark a focusable link whose name states surface, path, repository and first-ness. The finding is the accumulation of diamonds down the rows, which the description states as an L3 shape clause. Narrow treatment: the table scrolls inside a focusable wrapper with sticky row-label columns and scroll shadows; the title is outside the wrapper; no stacking, so no ARIA roles are needed |
+| 5.1 access layers | summary first in the DOM (rendered under the table); the chart is the table, so layer 2 is the chart itself; layer 3: native table semantics with row and column headers, and every mark a focusable link whose name states surface, path, repository and first-ness. The finding is the accumulation of diamonds down the rows, which the description states as an L3 shape clause. Narrow treatment: below 990 px the era column becomes a group row and one sticky row-label column remains; below 478 px the table scrolls inside a focusable wrapper with scroll shadows and a sentence above it saying so and naming the column count; the title is outside the wrapper; no stacking, so no ARIA roles are needed |
 | 5.2 description L1 to L3, never L4 | type, encodings and bands (L1); surfaces per build, first appearances per build, running count, the lane's extremes and the undated versions (L2); where the marks thicken and the diamonds step (L3). No cause or implication |
 | K2 every figure traces to a build step | every figure in the title, subtitle, annotations, description, lane and row labels is computed in `build_page.py` from `data/builds.json` and `data/standard.json` (`facts()`, `description()`, `lane_positions()`, `check_title()`); prose in `page_text.py` carries no typed figure, only tokens the builder fills and verifies |
 | 5.3 WCAG AA | 12 px minimum text everywhere on the card (the strip at 12 px, above Rule 4.2's 10 to 11 px, because 5.3's floor is stated as anywhere); reflow at 320 asserted by `render_charts.py` (the document never scrolls sideways; the table scrolls inside its wrapper, which is 1.4.10's data-table allowance and 5.1's named treatment); focus ring 2 px Evergreen on every link; every cell link at least 24 by 28 px; `color-scheme: light` |
 | 5.4 monochrome | square against diamond survives grayscale; the lane tick carries its label |
-| 5.5 responsive | form constant: a table at every width. Below the host breakpoint the surface names collapse to their numbers and the band names to their letters, both by the mapping printed in the key; nothing is deleted; nothing rotates; the marks do not shrink below 12 px |
+| 5.5 responsive | form constant: a table at every width. Three declared host breakpoints: below 990 the era becomes a group row and cells narrow to 48 px; below 830 the surface names collapse to their numbers and the band names to their letters, both by the mapping printed in the key, which moves above the table; below 478 the scroll sentence appears. Nothing is deleted; nothing rotates; the marks do not shrink below 12 px |
 | K4 tick interval derived | N/A: no axis ticks |
 | 5.6 reduced motion | no animation or transition exists; a reduced-motion rule zeroes any the browser might add |
 | 5.7 dark mode | `color-scheme: light` declared in the stylesheet; no dark palette exists (D6) |
 | 6.7 one strip | one chart, one strip, under the card; the page carries no second strip. The "About this page" block at the page end names the freeze in prose and is not a strip |
-| 7.1 / 7.4 panel | **NOT RUN**: fatal under 7.1 until it is; recorded, not claimed |
+| 7.1 / 7.4 panel | RUN (section 4). 7.1's test: at the design width and the 741 state every domain seat's first sentence carried the title's claim; at 320 and 742 none did, because the table was cropped. Round 1 removed the 742 crop (the full-name layout now engages only where it fits) and gave the 320 state a sentence naming the crop. Recorded as PASS at the design and laptop widths, and as fixed-not-re-read at 320: a second round on the phone state is Aaron's call |
 | 7.2 AI output cleared | the page was model-built; this checklist was run in full by the build session, which is the author and cannot be the panel |
-| K6 widths | 320 · 741 · 742 · 1040, recorded above |
+| K6 widths | 320 · 519 · 520 · 871 · 872 · 1031 · 1032 · 1040, recorded above |
 
 **Preference score, as the author reads it: 0.** No PREFERENCE check is
 failed on the author's own reading.
 
-**Invariant status: one open**, 7.1/7.4, because no panel has run. **The page
-does not ship until it has.** Everything else is PASS, PASS-BY-EXCEPTION or
-N/A as recorded.
+**Invariant status: none open** on the author's reading after Round 1. The
+panel ran, every finding is dispositioned, and the two states whose first
+sentence missed the title were the cropped ones, both changed. What remains
+before publish is Aaron's rewrite of the two `[AARON]` lines and Part 2b.
 
 ## 2 · Findings from this build session's own review, before any panel
 
@@ -675,21 +683,21 @@ indication only; see the `HEAD` warning at the top.
 
 | # | Finding, in the reviewer's words | Seats | n | Defect? | Novel? | Disposition | Rule |
 |---|---|---|---|---|---|---|---|
-| 1 | *"the title says fourteen and the table stops at eight"* — and *"The right-hand edge looks like a finished edge"* | 1,2,3,4 | **4** | yes | | *author* | K6 / 6.11 |
-| 2 | *"The title tells me to count the diamonds and I physically cannot."* (320 and 742) | 1,2,3,4 | **4** | yes | | *author* | K6 / 7.1 |
-| 3 | *"Fourteen lookups to learn what the chart is about. That's fine for counting, useless for reading."* (741, numeric-only headers) | 1,2,3,4 | **4** | yes | | *author* | labelling |
-| 4 | *"The instruction 'Count the diamonds to check the title' returns a number that contradicts the title, and the chart gives the reader no reason to doubt their own count."* | 1,3,4 | **3** | yes | | *author* | 7.1 |
-| 5 | *"I read the title the first way, then counted build nine's row and got ten"* — "Fourteen by build nine" reads as build nine's score; the cumulative total is never drawn | 2,3,4 | **3** | yes | | *author* | 7.1 |
-| 6 | *"the green note ... says 'the golden fixture is the fourteenth surface,' and on this screen the golden fixture is plainly column 8"* (also a trace-twice trap at 1040) | 2,4 | 2 | yes | | *author* | 7.1 |
-| 7 | *"Not a styling complaint, it genuinely slowed my reading"* — era and build labels hyphenate and wrap to four or five lines at narrow widths | 3,4 | 2 | yes | | *author* | type pairing |
-| 8 | *"they interrupt the build sequence and a reader counting rows must know to skip them"* — the design-standard version rows put a second timeline in the row axis at equal visual weight | 3,4 | 2 | yes | | *author* | 5.x |
-| 9 | *"to decide whether a mark in row 8 sits in column 10 or 11 you track your eye up about 1,100 pixels with nothing to follow"* | 4 | 1 | yes | | *author* | 3.x |
-| 10 | *"the blue version chips and the grey carry-squares become identical, distinguishable only by living in a grey band row"* — the one encoding not redundant to shape | 4 | 1 | yes | | *author* | 3.4 |
-| 11 | *"Are these nine clients? The names read like real engagements to me and I couldn't tell whether I was looking at internal projects or customer work."* | 3 | 1 | yes | | *author* | 0.1 |
-| 12 | *"absence is much harder to establish than presence and it's usually where these things rot"* — no support for "empty cells are facts, not debts" | 1,2,3 | **3** | no | | *author* | — |
-| 13 | *"Every one of these fourteen boxes is ticked by the same people who wrote the list"* | 1,3 | 2 | no | | *author* | — |
-| 14 | *"would let the reader read '14' directly off row 9 instead of counting 14 diamonds spread over 2,000 pixels"* — no per-row or cumulative total column | 2,4 | 2 | no | | *author* | — |
-| 15 | *"a surface could have been added to build one last week and it'd look identical to one that shipped with it"* — marks are undated | 2 | 1 | no | | *author* | — |
+| 1 | *"the title says fourteen and the table stops at eight"* — and *"The right-hand edge looks like a finished edge"* | 1,2,3,4 | **4** | yes | yes (742); the 320 misreading was note 14 | **fixed**: the full-name layout engages only where all fourteen columns fit (host 990 px); below it a numbered layout fits down to 520 px; below that a sentence above the table says it scrolls and names the column count | K6 / 6.11 |
+| 2 | *"The title tells me to count the diamonds and I physically cannot."* (320 and 742) | 1,2,3,4 | **4** | yes | no at 320 (note 14); yes at 742 | **fixed** at 742, which no longer scrolls; **accepted** at 320: the count stays a count of marks, since a totals column is forbidden by the spec; the sentence and the shadow say the columns are there | K6 / 7.1 |
+| 3 | *"Fourteen lookups to learn what the chart is about. That's fine for counting, useless for reading."* (741, numeric-only headers) | 1,2,3,4 | **4** | yes | yes | **fixed in part**: names show down to 830 px; below that the key moves above the table, the column numbers repeat under the last row and the era column becomes a group row. Numbers-only headers remain below 830 px because names cannot be set horizontally in 24 px cells and nothing rotates | labelling |
+| 4 | *"The instruction 'Count the diamonds to check the title' returns a number that contradicts the title, and the chart gives the reader no reason to doubt their own count."* | 1,3,4 | **3** | yes | yes | **fixed**: follows 1; no state now crops at a column boundary without a cue | 7.1 |
+| 5 | *"I read the title the first way, then counted build nine's row and got ten"* — "Fourteen by build nine" reads as build nine's score; the cumulative total is never drawn | 2,3,4 | **3** | yes | no (note 2) | **fixed**: the title reads "Fourteen had appeared by build nine"; the subtitle says fourteen diamonds, one per surface | 7.1 |
+| 6 | *"the green note ... says 'the golden fixture is the fourteenth surface,' and on this screen the golden fixture is plainly column 8"* (also a trace-twice trap at 1040) | 2,4 | 2 | yes | yes | **fixed**: the annotation reads "the golden fixture (column eight) is the last of fourteen to appear" | 7.1 |
+| 7 | *"Not a styling complaint, it genuinely slowed my reading"* — era and build labels hyphenate and wrap to four or five lines at narrow widths | 3,4 | 2 | yes | yes | **fixed**: the era labels become group rows below 990 px; nothing hyphenates at any width | type pairing |
+| 8 | *"they interrupt the build sequence and a reader counting rows must know to skip them"* — the design-standard version rows put a second timeline in the row axis at equal visual weight | 3,4 | 2 | yes | no (notes 5 and 7) | **fixed**: lane rows in muted ink with a small-caps label and a bar tick, subordinate to the build rows | 5.x |
+| 9 | *"to decide whether a mark in row 8 sits in column 10 or 11 you track your eye up about 1,100 pixels with nothing to follow"* | 4 | 1 | yes | yes | **fixed**: 1 px rules between every column, darker at the band boundaries, and the numbers repeated under the last row | 3.x |
+| 10 | *"the blue version chips and the grey carry-squares become identical, distinguishable only by living in a grey band row"* — the one encoding not redundant to shape | 4 | 1 | yes | yes | **fixed**: the lane tick is a 3 by 11 px bar, not a square | 3.4 |
+| 11 | *"Are these nine clients? The names read like real engagements to me and I couldn't tell whether I was looking at internal projects or customer work."* | 3 | 1 | yes | yes | **fixed**: the subtitle says "independent projects, not client work" | 0.1 |
+| 12 | *"absence is much harder to establish than presence and it's usually where these things rot"* — no support for "empty cells are facts, not debts" | 1,2,3 | **3** | no | yes | **accepted**: how a cell is filled or left empty is a written rule per column, surfaces.md, now linked from the page; not drawable | — |
+| 13 | *"Every one of these fourteen boxes is ticked by the same people who wrote the list"* | 1,3 | 2 | no | yes | **rejected** as a defect: the room's question; every cell links to the evidence, which is the answer | — |
+| 14 | *"would let the reader read '14' directly off row 9 instead of counting 14 diamonds spread over 2,000 pixels"* — no per-row or cumulative total column | 2,4 | 2 | no | yes | **rejected** as a change: the spec's standing decision 4 and the Part 2 brief forbid a totals column; forwarded to Aaron as the panel's highest-leverage suggestion | — |
+| 15 | *"a surface could have been added to build one last week and it'd look identical to one that shipped with it"* — marks are undated | 2 | 1 | no | yes | **accepted**: dating a mark belongs to the retrospective row the schema reserves; build-forward | — |
 
 **Why 12, 13, 14 and 15 are marked "no".** They are questions about the subject
 matter and about scope, not misreadings a competent reader would make from the
@@ -752,10 +760,56 @@ clean.
 defects from four readers measure nothing about how often a real reader would
 misread this. Three readers are not a sample.
 
+## 5 · Disposition, and Round 1 (2026-09-17)
+
+**Novelty.** The panel did not see `pre-panel-notes.md`, so `N` is filled
+here against those notes, written 2026-09-16 before the panel ran. Of the
+eleven defects, two were written down in substance (5 against note 2, 8
+against notes 5 and 7) and two were written down at a different width (1 and
+2 against note 14, which anticipated the phone crop and not the laptop one).
+Counting the two partial anticipations as not novel, seven of eleven defects
+are novel; counting them as novel, nine.
+
+**The moderator's observation on the crossing was correct and is accepted.**
+The first build's breakpoint (700) switched the header to numbers where the
+narrow table already fit, and switched back to names where the wide table did
+not: the chart was complete below the breakpoint and cropped above it, across
+one pixel. Round 1 declares the breakpoints where the layouts actually fit:
+990 (the wide table no longer fits), 830 (the narrow layout's named header
+no longer fits), 478 (the narrow table itself no longer fits and the page
+says so). `render_charts.py` records that no state at any crossing scrolls
+except below 478, where the sentence appears.
+
+**What changed, finding by finding**, is in the table above. In code:
+`docs/assets/page.js` (three breakpoints), `src/build_page.py` (title, era
+group rows, footer numbers, column rules, lane styling, scroll sentence, the
+key's placement, the link to `surfaces.md`), `src/page_text.py` (subtitle,
+annotation, lane label), `docs/index.html` and `docs/renders/` regenerated.
+The data files are untouched; `inventory.py --check` is byte-identical.
+
+**Not changed, and why.** A totals or running-count column (finding 14): the
+spec's standing decision 4 and the Part 2 brief forbid a score, total or
+count column, and the panel's own moderator rated it the single change with
+the most leverage on findings 1, 2 and 5. That is Aaron's decision, not this
+session's, and it is forwarded in the report.
+
+## 6 · Summary, carried into the header
+
+```
+PANEL: 4 seats, simulated · 1 chart (4 states) · findings 15 · defects 11 · novel 7 (9 if two partial anticipations count)
+       fixed 10 · accepted 3 · rejected 2 · multi-seat defects 8
+       D = 11.00 defects/chart (2.75 per state) · N = 0.64 · R = 0.13
+```
+
+`D` is not comparable to the estate's multi-chart panels, as the record says;
+per state it is 2.75. `R` counts the two findings rejected (13 as a defect, 14
+as a change) over fifteen findings. Finding 2 is counted as accepted because
+its 320 px residue ships.
+
 ## Owed
 
-- The reading panel, run from the Estate project on `docs/renders/`, at 320
-  and 1040 at least; its record and disposition enter §4 of this file.
+- A second panel round on the phone state (320), if Aaron wants the Round 1
+  changes read rather than reasoned about; the first round could not see them.
 - The two `[AARON]` lines in `src/page_text.py`, rewritten by Aaron before
   publish.
 - The thumbnail `og:image` names, produced by the site-side session.
@@ -763,4 +817,6 @@ misread this. Three readers are not a sample.
 
 ## Verdict
 
-**DO NOT SHIP** until the panel returns. No other invariant is open.
+No invariant open on the author's reading after Round 1. **SHIP after Aaron
+rewrites the two `[AARON]` lines and Part 2b publishes.** A second round on
+the phone state is offered, not required by the checklist.

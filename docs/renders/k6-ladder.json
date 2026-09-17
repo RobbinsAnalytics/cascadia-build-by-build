@@ -1,19 +1,37 @@
 {
   "declared_breakpoints": [
-    700
+    478,
+    830,
+    990
   ],
   "widths_rendered": [
     320,
-    741,
-    742,
+    519,
+    520,
+    871,
+    872,
+    1031,
+    1032,
     1040
   ],
   "crossings": [
     {
       "chart": "matrix",
-      "breakpoint": 700,
-      "below": 741,
-      "above": 742
+      "breakpoint": 478,
+      "below": 519,
+      "above": 520
+    },
+    {
+      "chart": "matrix",
+      "breakpoint": 830,
+      "below": 871,
+      "above": 872
+    },
+    {
+      "chart": "matrix",
+      "breakpoint": 990,
+      "below": 1031,
+      "above": 1032
     }
   ],
   "charts": [
@@ -25,23 +43,51 @@
     "320": {
       "host": 278,
       "narrow": true,
-      "table": 494,
+      "table": 466,
       "wrapper": 266,
       "scrolls": true
     },
-    "741": {
-      "host": 699,
+    "519": {
+      "host": 477,
       "narrow": true,
-      "table": 494,
-      "wrapper": 687,
+      "table": 466,
+      "wrapper": 465,
       "scrolls": false
     },
-    "742": {
-      "host": 700,
+    "520": {
+      "host": 478,
+      "narrow": true,
+      "table": 466,
+      "wrapper": 466,
+      "scrolls": false
+    },
+    "871": {
+      "host": 829,
+      "narrow": true,
+      "table": 466,
+      "wrapper": 817,
+      "scrolls": false
+    },
+    "872": {
+      "host": 830,
+      "narrow": true,
+      "table": 788,
+      "wrapper": 818,
+      "scrolls": false
+    },
+    "1031": {
+      "host": 989,
+      "narrow": true,
+      "table": 788,
+      "wrapper": 977,
+      "scrolls": false
+    },
+    "1032": {
+      "host": 990,
       "narrow": false,
       "table": 964,
-      "wrapper": 676,
-      "scrolls": true
+      "wrapper": 966,
+      "scrolls": false
     },
     "1040": {
       "host": 998,

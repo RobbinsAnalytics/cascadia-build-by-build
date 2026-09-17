@@ -25,10 +25,22 @@
 
   /**
    * EVERY WIDTH AT WHICH THIS PAGE CHANGES ITS MIND, DECLARED IN ONE PLACE.
-   * One breakpoint, on the host element's clientWidth.
+   * Two breakpoints, both on the host element's clientWidth.
+   *   narrow: below it the full-name header no longer fits (the wide table is
+   *           964 px inside a 24 px card padding), so headers show numbers,
+   *           the key moves above the table and the era becomes a group row.
+   *           The first build set this at 700 and the panel found the table
+   *           silently cropped between 742 and ~1030; the crossing now sits
+   *           where the wide table actually fits.
+   *   numbers: below it the narrow layout's 48 px cells with names no
+   *           longer fit either (panel finding 3), so headers show numbers
+   *           only, cells drop to 24 px and the key moves above the table.
+   *   hint:   below it even the narrow table (466 px) is wider than the
+   *           wrapper (host less 12 px of card padding), so it scrolls and a
+   *           sentence says so.
    */
-  var BP = { narrow: 700 };
-  window.CASCADIA_BREAKPOINTS = [BP.narrow];
+  var BP = { hint: 478, numbers: 830, narrow: 990 };
+  window.CASCADIA_BREAKPOINTS = [BP.hint, BP.numbers, BP.narrow];
 
   var host = document.getElementById('matrix');
   if (!host) { return; }
@@ -45,6 +57,8 @@
   function layout() {
     var w = host.clientWidth;
     host.classList.toggle('narrow', w < BP.narrow);
+    host.classList.toggle('numbers', w < BP.numbers);
+    host.classList.toggle('hint', w < BP.hint);
     if (scroller) { host.style.setProperty('--wrap-w', scroller.clientWidth + 'px'); }
     shadows();
   }
