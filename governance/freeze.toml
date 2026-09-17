@@ -23,8 +23,8 @@ module = "cascadia-build-by-build"
 # loud on the page; advancing it is a deliberate act.
 as_of_date = "2026-09-16"
 
-# "HEAD" until the freeze commit exists; then that commit's full SHA.
-baseline = "HEAD"
+# The freeze commit. "HEAD" only until that commit existed.
+baseline = "281a445e008df24cece0edfcdb65f47e3d8c3e55"
 
 protected_paths = [
   "data/builds.json",
