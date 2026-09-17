@@ -49,19 +49,35 @@ directory, so that session was never governed by the hooks it was installing.
 Local directory and GitHub repository are both `cascadia-build-by-build`, the
 one-name rule. No `-analytics` suffix.
 
-## The freeze does not exist yet
+## The freeze: `governance/freeze.toml` protects `data/*`
 
-**`governance/freeze.toml` is not in this repository, and that is correct as of
-Part 0.** It lands with the data in Part 1, protecting `data/*`, alongside
-`src/validate_freeze.py` copied verbatim from the estate template.
+**`as_of_date` in `governance/freeze.toml` is a claim made out loud.** It is
+the date the inventory was read from the nine sibling repositories, and the
+page will say it. Advancing it is a deliberate act, never a side effect.
 
-**When it does land, know this about the template gate before trusting it: it
-cannot tell an untracked file from an unchanged one.** It compares with
+**`src/inventory.py` overwrites the freeze.** Run it only to deliberately
+refresh the inventory, then commit the diff as a refreeze and move `baseline`
+to the new commit. Against an unchanged estate it is byte-identical, which is
+what `validate.py` checks; against a changed estate the diff is the change.
+
+**Build order:** `python src/inventory.py`, then the gates:
+`python src/validate.py`, `python src/validate_freeze.py`,
+`python .claude/hooks/hook_test_matrix.py`. All exit zero or nothing is done.
+
+**Generated, not authored.** `data/builds.json` and `data/standard.json` are
+build outputs. Hand-editing either is the failure mode the rest of this estate
+has already paid for; regenerate instead. The column definitions in
+`governance/surfaces.md` and the constants at the top of `src/inventory.py`
+are the authored layer.
+
+**Know this about the template gate before trusting it: it cannot tell an
+untracked file from an unchanged one.** `src/validate_freeze.py` is the estate
+template verbatim (parking lot 8a). It compares with
 `git diff --quiet <baseline> -- <path>`, and an untracked path produces no
 diff, so a protected file that exists on disk but was never committed passes.
 **A passing gate is therefore a claim about committed files only.** Check
-`git status` too. The template carries this defect estate-wide until a
-`cascadia-standards` session fixes it.
+`git status` in this repository too. The template carries this defect
+estate-wide until a `cascadia-standards` session fixes it.
 
 ## Committing
 
