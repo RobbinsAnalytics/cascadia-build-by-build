@@ -102,3 +102,49 @@ for five rows and wrong for four, silently, until the link check ran.
 
 **Carried by:** `src/inventory.py` (the two fields), `src/validate.py` (the
 convention check), `src/build_page.py` (the URL form).
+
+## D4 · The title is a claim about first appearances, in a fixed shape
+
+The matrix's title is "Two ways to check a number at build one. Fourteen by
+build nine." Its shape is a count of test surfaces at the first build and the
+running count of surfaces seen by the last, both readable by counting the
+diamond marks. The first working title, "Each build kept every test the last
+one had", was retired on 2026-09-17 because it is false on the plot: Matter
+Ledger and Fee Examiner lack the one-command rebuild and row-count columns
+that every earlier build carried, Finance lacks row-count validation, and
+Revenue Assurance lacks the source register and the scheduled run. The
+per-row count is not monotone; the running count is, by construction, and
+that is what the title claims. The build fails if either number stops being
+true of the data.
+
+*Counterfactual:* a title that claimed more than the marks show would be
+repeated by readers who never check it (Rule 3.2), and the page's own test,
+every cell a link, would not catch it.
+
+**Carried by:** `src/build_page.py` (`T_TITLE`, `check_title()`),
+`governance/chart-review.md` 3.2.
+
+## D5 · The matrix is an HTML table, not a canvas
+
+The matrix is categorical presence, not quantity: a cell holds a path or
+nothing. It is rendered as a real `<table>` with row and column headers, and
+every filled cell is a link. A table is its own Rule 5.1 data layer, its
+headers are read by assistive technology without a sibling DOM layer, a
+canvas cell cannot be a link, and there is no axis to scale. ECharts does not
+ship on this page. The class is detailed and the quadrant explanatory (Rules
+0.2 and 0.3, declared in the chart review).
+
+*Counterfactual:* a grid drawn on a canvas would need a parallel table for
+Rule 5.1 anyway, and its cells could only point at files through a tooltip,
+which a static render cannot show.
+
+**Carried by:** `src/build_page.py`, `governance/chart-review.md` §0.
+
+## D6 · No dark mode
+
+The page declares `color-scheme: light` and carries no dark palette. Rule
+5.7: dark mode is a second, separately validated palette or it is nothing,
+and no second palette exists in the estate.
+
+**Carried by:** `docs/assets/cascadia.css` (`color-scheme: light`),
+`governance/chart-review.md` 5.7.
