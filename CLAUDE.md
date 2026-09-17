@@ -79,6 +79,33 @@ diff, so a protected file that exists on disk but was never committed passes.
 `git status` in this repository too. The template carries this defect
 estate-wide until a `cascadia-standards` session fixes it.
 
+## Stage 2: the page, built from the two data files only
+
+`docs/index.html` is built by `src/build_page.py` from `data/builds.json` and
+`data/standard.json`, plus the as-of date and freeze commit in
+`governance/freeze.toml`. Every figure on the page is computed there; the
+prose is in `src/page_text.py` as plain strings with tokens the builder fills
+and verifies, and it is the only authored text on the page. Two lines there
+are marked `[AARON]` and ship in his words, not the session's.
+
+**Rebuild order:** `python src/inventory.py` (only to deliberately refresh the
+freeze), then `python src/build_page.py`, then `python src/render_charts.py`.
+The renderer derives the K6 ladder from `window.CASCADIA_BREAKPOINTS` in
+`docs/assets/page.js` and fails closed if none is declared.
+
+**Generated, never edited:** `docs/index.html` and everything under
+`docs/renders/`. The stylesheet is Revenue Assurance's, copied with a line
+saying so; the favicon is the site's. No ECharts ships: the one chart is an
+HTML table, and the chart review says why under 0.3.
+
+**Published by GitHub Pages from `main`, folder `/docs`**, the same way as
+Revenue Assurance and Fee Examiner, at
+`https://www.robbinsanalytics.com/cascadia-build-by-build/`. The site
+repository holds no copy of this page; it holds the case study and the links
+(Part 3). A merge to `main` is therefore a publish, and `main` stays
+publishable: the panel record is dispositioned in
+`governance/chart-review.md` before anything reaches it.
+
 ## Committing
 
 **Stage by name, never the two blanket forms.** They are denied in

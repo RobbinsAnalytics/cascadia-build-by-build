@@ -8,7 +8,7 @@ surface first appeared, and what every filled cell links to on disk. It has no
 data of its own. Its source is the other nine module repositories, all of
 them read-only, and nothing here invents a score.
 
-**Status: Part 1. Data layer committed and frozen. No page exists.**
+**Status: Part 2b. Page built, panelled, dispositioned and published from `main:/docs`. Part 3, surfacing on the site, is next.**
 
 ## Repository and folder names match
 
