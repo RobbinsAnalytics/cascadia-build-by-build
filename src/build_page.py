@@ -641,7 +641,7 @@ def main() -> int:
         out = out.replace(f"@@{k}@@", v)
     if "@@" in out:
         raise SystemExit("unsubstituted token in the template")
-    if "—" in out:
+    if chr(0x2014) in out:
         raise SystemExit("an em dash reached the page")
     DOCS.mkdir(exist_ok=True)
     (DOCS / "index.html").write_text(out, encoding="utf-8", newline="\n")
