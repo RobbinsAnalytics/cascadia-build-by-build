@@ -16,7 +16,11 @@ THE THREE RULES THIS SCRIPT LIVES UNDER
      `git show`, `git symbolic-ref` or the filesystem. None of those takes
      `.git/index.lock`. It never runs `git status` anywhere.
   2. Rows, eras, names, slugs and stack phrases are constants fixed by
-     governance/spec.md. Nothing about a row's membership is inferred.
+     governance/spec.md. Nothing about a row's membership is inferred. Two
+     fields are read, not fixed: `remote`, the GitHub repository name from
+     origin's URL, and `default_branch`, the branch checked out at read time
+     (Part 1 established each sibling sits on its default branch). The page
+     links every cell to github.com/RobbinsAnalytics/<remote>/blob/<branch>/.
   3. The detection rules are the paragraphs in governance/surfaces.md. The
      RULES table below implements them; where the two disagree, one is wrong.
      A cell is a repo-relative path or None, nothing else. Every path written
@@ -225,6 +229,13 @@ def git(repo: Path, *args: str) -> str:
     return r.stdout
 
 
+def remote_name(repo: Path) -> str:
+    """The GitHub repository name from origin's URL: host, org and .git stripped."""
+    url = git(repo, "remote", "get-url", "origin").strip()
+    name = url.rstrip("/").split("/")[-1].split(":")[-1]
+    return name[:-4] if name.endswith(".git") else name
+
+
 def branch_of(repo: Path) -> str:
     try:
         return git(repo, "symbolic-ref", "--short", "HEAD").strip()
@@ -268,7 +279,9 @@ def resolve(repo: Path, cand: Candidate) -> str | None:
             text = text_of(p)
             if not all(re.search(m, text) for m in cand.markers):
                 continue
-        return rel
+        # A directory cell carries a trailing slash, so a page can link to it
+        # as a tree rather than a blob without reading the sibling itself.
+        return rel + "/" if p.is_dir() else rel
     return None
 
 
@@ -298,8 +311,10 @@ def build_rows() -> tuple[list[dict], list[str]]:
             raise RuntimeError(f"{spec['key']}: era {spec['era']!r} is not one of the five")
         first, last = commit_dates(repo)
         head = git(repo, "rev-parse", "--short", "HEAD").strip()
-        provenance.append(f"{spec['key']:34} branch={branch_of(repo):8} HEAD={head} "
-                          f"first={first} last={last}")
+        branch = branch_of(repo)
+        remote = remote_name(repo)
+        provenance.append(f"{spec['key']:34} branch={branch:8} remote={remote:28} "
+                          f"HEAD={head} first={first} last={last}")
         cells = surfaces_for(spec["key"])
         for surface, rel in cells.items():
             if rel is not None and not (repo / rel).exists():
@@ -311,6 +326,8 @@ def build_rows() -> tuple[list[dict], list[str]]:
             "site_slug": spec["site_slug"],
             "era": spec["era"],
             "stack": spec["stack"],
+            "remote": remote,
+            "default_branch": branch,
             "first_commit": first,
             "last_commit": last,
             "surfaces": cells,

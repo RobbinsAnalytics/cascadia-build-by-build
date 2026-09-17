@@ -11,7 +11,8 @@ Checks the things governance/spec.md says must be true of the data layer:
      tracked in that sibling's index: the page's own test, applied before
      there is a page
   4. data/standard.json carries each version once, in order, with dates that
-     never go backwards where they are present
+     never go backwards where they are present; every row's remote and
+     default_branch are set, and the remote follows REMOTE-CONVENTION.md
   5. re-running src/inventory.py reproduces both files byte for byte, so the
      inventory is a function of disk and not of the session that ran it
 
@@ -37,6 +38,11 @@ sys.path.insert(0, str(REPO / "src"))
 import inventory  # noqa: E402  (the constants: rows, eras, surfaces, versions)
 
 failures: list[str] = []
+
+# cascadia-standards/governance/REMOTE-CONVENTION.md: the split pattern drops
+# "-analytics" on the remote; every other row's remote equals its key.
+SPLIT_ROWS = {"cascadia-controltower-analytics", "cascadia-dealdesk-analytics",
+              "cascadia-finance-analytics", "cascadia-matter-ledger-analytics"}
 
 
 def ok(msg: str) -> None:
@@ -96,6 +102,19 @@ def main() -> int:
                 fail(f"{k}: {s} is not a repo-relative path or null: {v!r}")
     if not failures:
         ok("every row has a valid era, ordered dates, null retro, and path-or-null cells")
+
+    # 2b. the link fields: REMOTE-CONVENTION.md's two patterns ---------------
+    for r in builds:
+        k = r["key"]
+        if not r.get("remote") or not r.get("default_branch"):
+            fail(f"{k}: remote or default_branch is empty")
+            continue
+        expected = k[:-len("-analytics")] if k in SPLIT_ROWS else k
+        if r["remote"] != expected:
+            fail(f"{k}: remote {r['remote']!r} does not follow REMOTE-CONVENTION "
+                 f"(expected {expected!r})")
+    if not any("remote" in f or "default_branch" in f for f in failures):
+        ok("remote and default_branch are set on every row and follow REMOTE-CONVENTION.md")
 
     # 3. every filled cell resolves -----------------------------------------------
     filled = checked = 0

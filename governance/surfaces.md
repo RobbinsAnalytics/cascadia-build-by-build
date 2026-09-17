@@ -6,7 +6,9 @@ paragraphs are the detection rules. `src/inventory.py` implements them and
 never the other way round: where the script and a paragraph disagree, the
 paragraph is wrong or the script is, and one of them gets fixed.*
 
-A cell holds one repo-relative path or nothing. The path is the artifact a
+A cell holds one repo-relative path or nothing. A directory cell carries a
+trailing slash, so a page can link to it as a tree rather than a blob without
+reading the sibling itself. The path is the artifact a
 reader can open and that the page will link to. Where several artifacts
 qualify, the cell carries the most specific one, and the rest are not lost:
 they are on disk in the same repository, one click away. An empty cell is a
