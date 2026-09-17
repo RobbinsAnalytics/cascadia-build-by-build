@@ -1,0 +1,32 @@
+# governance/freeze.toml: the module-specific half of the freeze gate.
+#
+# cascadia-standards template v1.0.0, instantiated for Cascadia Build by Build.
+#
+# `src/validate_freeze.py` is copied verbatim from
+# cascadia-standards/templates/validate_freeze.py and never edited here. This
+# file is where the module says what it considers frozen.
+#
+# This module has no data of its own. What it freezes is the inventory it read
+# from the nine sibling repositories on the as-of date below. Advancing that
+# date means re-running src/inventory.py and committing the diff as a
+# deliberate refreeze, never a side effect of a build.
+#
+# Known defect carried from the template (parking lot 8a): the gate compares
+# with `git diff --quiet <baseline> -- <path>` and cannot tell an untracked
+# file from an unchanged one. A passing gate is a claim about committed files
+# only. Check `git status` in this repository too.
+
+[freeze]
+module = "cascadia-build-by-build"
+
+# The date the inventory was run against the nine siblings. A claim made out
+# loud on the page; advancing it is a deliberate act.
+as_of_date = "2026-09-16"
+
+# "HEAD" until the freeze commit exists; then that commit's full SHA.
+baseline = "HEAD"
+
+protected_paths = [
+  "data/builds.json",
+  "data/standard.json",
+]
