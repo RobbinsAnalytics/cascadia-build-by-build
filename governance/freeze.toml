@@ -24,7 +24,7 @@ module = "cascadia-build-by-build"
 as_of_date = "2026-10-07"
 
 # The freeze commit. "HEAD" only until that commit existed.
-baseline = "d967ff50f1cc66d1479bbf278fc09db1ae1f2cc3"
+baseline = "62b889e724cea1bd90caf4903b05e2c44c6da9e6"
 
 protected_paths = [
   "data/builds.json",
