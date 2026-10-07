@@ -28,7 +28,7 @@ LEDE_SECOND = ("Every filled cell links to the file on GitHub that it names. An 
 
 # The matrix caption's subtitle, in secondary ink under the finding. The
 # as-of date and the freeze are filled by the builder.
-MATRIX_SUBTITLE = ("Nine portfolio modules (independent projects, not client work) by {n} "
+MATRIX_SUBTITLE = ("Ten portfolio modules (independent projects, not client work) by {n} "
                    "test surfaces, read from disk on {as_of}. Rows in first-commit order, "
                    "grouped by era. A square marks a surface the build carries and links to "
                    "the file; a diamond marks the first build to carry it, so there are {n} "
@@ -159,7 +159,7 @@ WALK = [
      "two engines third, and published nothing until all of them agreed."),
 ]
 
-WALK_LIST_INTRO = "Nine modules, oldest first."
+WALK_LIST_INTRO = "Ten modules, oldest first."
 
 MODULE_LINES = {
     "manufacturing-analytics": (
@@ -190,6 +190,10 @@ MODULE_LINES = {
     "cascadia-revenue-assurance": (
         "A synthetic subscription book: two derivation paths from one rules document, a "
         "golden fixture written first, and invoices reconciled to the month."),
+    "cascadia-early-warning": (
+        "Public FDA device-report counts for seven product codes: a forecast pre-registered "
+        "before its first row, a locked test run once, every cell re-derived in SQL, and a "
+        "weekly live edge that scores each forecast as its month elapses."),
 }
 
 # The walk's closing line. Drafted by the build session; accepted by Aaron on
@@ -199,7 +203,7 @@ CLOSING_AARON = "From here the walk is a conversation. Pick a module; its row is
 DISCLOSURE = (
     "An independent portfolio project by Aaron Robbins. This page is generated from two "
     "data files, data/builds.json and data/standard.json, in the repository linked below; "
-    "the inventory script that writes them reads the nine module repositories and never "
+    "the inventory script that writes them reads the ten module repositories and never "
     "writes in one. No score, level, weight or percentage exists in the data. A cell is a "
     "path or it is empty. Older modules are not retrofitted; an empty cell is a fact about "
     "what a build carried, never a debt.")

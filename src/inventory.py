@@ -97,6 +97,13 @@ ROWS = [
     {"key": "cascadia-revenue-assurance", "name": "Cascadia Revenue Assurance",
      "site_slug": "cascadia-revenue-assurance", "era": "Re-derived",
      "stack": "Python, CSV, ECharts, DuckDB gate"},
+    # The tenth build. It re-derives every cell down a SQL path AND runs a
+    # scheduled live edge AND pre-registers its forecast before the first row;
+    # the spec's five eras end at "Re-derived", so it takes that era, and
+    # whether a sixth era is owed is Aaron's call (decision record D7).
+    {"key": "cascadia-early-warning", "name": "Cascadia Early Warning",
+     "site_slug": "cascadia-early-warning", "era": "Re-derived",
+     "stack": "Python, DuckDB, statsmodels, ECharts, scheduled pull"},
 ]
 
 BANDS = {
@@ -214,6 +221,8 @@ NAMED_CHECKS: dict[tuple[str, str], Candidate] = {
         C("validate.py", (r"Database content hash matches the recorded run",)),
     ("cascadia-revenue-assurance", "row_count_validation"):
         C("src/validate.py", (r"the engine refused exactly the transactions the generator intended, by reason",)),
+    ("cascadia-early-warning", "row_count_validation"):
+        C("src/validate.py", (r"raw report count per code-month equals the independent S-02 count series",)),
 }
 
 # ---------------------------------------------------------------------------

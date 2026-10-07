@@ -21,7 +21,7 @@ module = "cascadia-build-by-build"
 
 # The date the inventory was run against the nine siblings. A claim made out
 # loud on the page; advancing it is a deliberate act.
-as_of_date = "2026-09-16"
+as_of_date = "2026-10-07"
 
 # The freeze commit. "HEAD" only until that commit existed.
 baseline = "d967ff50f1cc66d1479bbf278fc09db1ae1f2cc3"

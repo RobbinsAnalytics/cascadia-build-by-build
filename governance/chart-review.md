@@ -820,3 +820,26 @@ its 320 px residue ships.
 No invariant open on the author's reading after Round 1. **SHIP after Aaron
 rewrites the two `[AARON]` lines and Part 2b publishes.** A second round on
 the phone state is offered, not required by the checklist.
+
+## Revision 2026-10-07: the tenth row, gate re-run, no new panel
+
+A revision, not a new build: the matrix gained a tenth row (Cascadia Early
+Warning, decision record D7) and the page was rebuilt from the regenerated
+`data/builds.json`. Under the estate's rule a revision gets the gate and a
+link, not a panel.
+
+| Check | Result |
+|---|---|
+| `src/inventory.py` | regenerated; re-run reproduces both files byte for byte |
+| `src/validate.py` | DOMAIN GATE: PASSED |
+| `src/build_page.py` | built; the title's two numbers and both annotations' facts re-asserted against the ten-row data |
+| `src/render_charts.py` (K6) | 320, 519, 520, 871, 872, 1031, 1032, 1040: exit 0, no overflow |
+| 3.2, the title | unchanged: "Fourteen had appeared by build nine" is a claim about first appearances and the tenth build introduces none, so the fourteen diamonds are where they were; the running-count check now tests the first build whose count reaches fourteen rather than the last row (D7) |
+| 3.4, the primary annotation | unchanged text; now anchored on the build that introduced the golden fixture (build nine) rather than on the last row |
+| 5.2, the description | regenerated: "A table of 10 builds ... Surfaces carried per build ..." from the data |
+| K2 | every figure in the description and the subtitle is computed from the two data files |
+
+What the reader now sees that the panel did not: a tenth row, in the
+Re-derived era, carrying all fourteen surfaces, with no diamond on it. The
+lede's first sentence still says "Nine Cascadia modules"; it is Aaron's
+accepted line and is left for him to rewrite.

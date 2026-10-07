@@ -213,8 +213,11 @@ def matrix_table(builds: list[dict], standard: list[dict], F: dict, as_of: str) 
 
     # Which annotations go where, and their text (figures filled here).
     fin = F["by_name"]["Cascadia Finance"]["key"]
-    last = builds[-1]["key"]
-    if F["per"][last]["seen"] != len(SURFACES) or "golden_fixture" not in F["per"][last]["first_list"]:
+    # The primary annotation sits on the build that introduced the golden fixture, the
+    # fourteenth surface to appear, which is build nine; a later build that carries all
+    # fourteen (the tenth, D7) introduces nothing and takes no annotation.
+    last = next((r["key"] for r in builds if "golden_fixture" in F["per"][r["key"]]["first_list"]), None)
+    if last is None or F["per"][last]["seen"] != len(SURFACES) or F["per"][last]["index"] != 9:
         raise SystemExit("the primary annotation's fact is not true of the data")
     if F["per"][fin]["firsts"] != max(p["firsts"] for p in F["per"].values()):
         raise SystemExit("the secondary annotation's fact is not true of the data")
@@ -343,10 +346,16 @@ T_TITLE = "Two ways to check a number at build one. Fourteen had appeared by bui
 
 
 def check_title(builds: list[dict], F: dict) -> None:
-    first_key, last_key = builds[0]["key"], builds[-1]["key"]
+    """The title is a claim about first appearances (D4): two surfaces at build one,
+    and the fourteenth surface first seen by build nine. The second clause is tested
+    on the FIRST build whose running count reaches fourteen, not on the last row,
+    because a later build that carries all fourteen (the tenth, D7) adds no first
+    appearance and leaves the claim as it was."""
+    first_key = builds[0]["key"]
     if F["per"][first_key]["n"] != 2 or F["per"][first_key]["index"] != 1:
         raise SystemExit("the title's first number is not what the data says")
-    if F["per"][last_key]["seen"] != 14 or F["per"][last_key]["index"] != 9:
+    reached = [F["per"][r["key"]]["index"] for r in builds if F["per"][r["key"]]["seen"] == 14]
+    if not reached or reached[0] != 9:
         raise SystemExit("the title's second number is not what the data says")
 
 
@@ -616,7 +625,7 @@ def main() -> int:
     summary = description(builds, standard, F)
     v28 = next(e for e in standard if e["version"] == VERSIONS[-1])
     prov = [
-        "Source: nine Cascadia module repositories on GitHub, and cascadia-standards",
+        "Source: ten Cascadia module repositories on GitHub, and cascadia-standards",
         f"read {as_of}, frozen at {baseline[:7]}, standard v{v28['version']} at {v28['commit'][:7]}",
         "cells link to files; empty cells are facts, not debts; three standard versions undated",
     ]

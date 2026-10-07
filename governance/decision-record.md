@@ -155,3 +155,45 @@ and no second palette exists in the estate.
 
 **Carried by:** `docs/assets/cascadia.css` (`color-scheme: light`),
 `governance/chart-review.md` 5.7.
+
+## D7 · The tenth row: Cascadia Early Warning, in the Re-derived era, pending Aaron's call on a sixth
+
+Added 2026-10-07 from a session rooted in `cascadia-early-warning`, on a
+branch, with nothing merged. The row is read from disk like the other nine:
+`src/inventory.py` resolves its fourteen cells from the repository's own
+files, and `data/builds.json` is regenerated, not edited.
+
+**The era.** The spec fixes five eras and says a later build gets an era when
+its row is written. Early Warning re-derives every published cell down a
+separately written SQL path (the Re-derived move), runs a scheduled live edge
+with health and a published reconciliation (the Operated move), and adds a
+move no earlier build made: the forecast harness, its periods and its
+promotion rule are committed before the first forecast row, the locked test
+runs once, and the validator reads the git log to prove both. It takes the
+latest era the spec defines, Re-derived, because an era is a label for a
+period of the portfolio and not a score, and because inventing a sixth era
+("Pre-registered") is a change to the spec that only Aaron makes.
+
+**What this row does not change.** The title's claim ("Fourteen had appeared
+by build nine") stays true: the tenth build introduces no fifteenth surface,
+so the diamond count is unchanged and so is the sentence. `LEDE_AARON` still
+reads "Nine Cascadia modules"; it is Aaron's accepted line and is not
+rewritten by a session. The three generated count sentences (the matrix
+subtitle, the walk's intro, the disclosure) now say ten.
+
+*Counterfactual:* leaving the row until a retrospective skill exists, which
+the spec allows, and which would have left the page saying nine while a
+tenth build was live.
+
+**Carried by:** `src/inventory.py` (ROWS); `src/page_text.py`
+(`MODULE_LINES`, three count sentences); `governance/spec.md` (rule 1);
+`data/builds.json`; `governance/freeze.toml` (as-of and baseline, moved with
+the refreeze commit).
+
+
+*Amended 2026-10-07, same session.* Two build-time checks assumed the last
+row is the build where the fourteenth surface appeared: `check_title`
+tested the last row's running count and index, and the primary annotation
+was anchored on the last row. Both now find the build that introduced the
+golden fixture and test that it is build nine with a running count of
+fourteen. The title and the annotation text are unchanged.

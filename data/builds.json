@@ -172,7 +172,7 @@
     "era": "Operated",
     "first_commit": "2026-08-26",
     "key": "cascadia-matter-ledger-analytics",
-    "last_commit": "2026-09-09",
+    "last_commit": "2026-10-06",
     "name": "Cascadia Matter Ledger",
     "remote": "cascadia-matter-ledger",
     "retro": null,
@@ -191,7 +191,7 @@
       "row_count_validation": null,
       "scheduled_run_with_health": "governance/health.json",
       "source_register": "governance/source-register.md",
-      "tests_as_code": "src/test_touch_readout.py",
+      "tests_as_code": "src/test_live_edge_retry.py",
       "validation_report": null
     }
   },
@@ -249,6 +249,34 @@
       "source_register": null,
       "tests_as_code": "src/test_golden.py",
       "validation_report": null
+    }
+  },
+  {
+    "default_branch": "build/early-warning",
+    "era": "Re-derived",
+    "first_commit": "2026-10-06",
+    "key": "cascadia-early-warning",
+    "last_commit": "2026-10-06",
+    "name": "Cascadia Early Warning",
+    "remote": "cascadia-early-warning",
+    "retro": null,
+    "site_slug": "cascadia-early-warning",
+    "stack": "Python, DuckDB, statsmodels, ECharts, scheduled pull",
+    "surfaces": {
+      "chart_review": "governance/chart-review.md",
+      "frozen_source": "governance/freeze.toml",
+      "golden_fixture": "tests/golden/",
+      "independent_rederivation": "src/validate_measures.py",
+      "metric_register": "governance/metric_register.md",
+      "negative_controls": "governance/validation_report.md",
+      "one_command_rebuild": "README.md",
+      "reading_panel": "governance/panel/findings.json",
+      "reconciliation_published": "governance/reconciliation.md",
+      "row_count_validation": "src/validate.py",
+      "scheduled_run_with_health": "governance/health.json",
+      "source_register": "governance/source-register.md",
+      "tests_as_code": "src/test_golden.py",
+      "validation_report": "governance/validation_report.md"
     }
   }
 ]

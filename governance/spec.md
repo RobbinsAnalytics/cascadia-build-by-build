@@ -27,7 +27,7 @@
 
 ## Standing decisions (Aaron's, 2026-09-16)
 
-1. Rows are the nine module repositories. Build by Build is not a row.
+1. Rows are the module repositories, nine at the freeze of 2026-09-16 and ten from the row added on 2026-10-07 (Cascadia Early Warning; decision record D7). Build by Build is not a row.
 2. The standard's version chain (VIZ-PRINCIPLES v1.0 to v2.8) is a thin second lane under the module rows.
 3. Five eras: Enterprise-shaped; Frozen and validated; Reviewed and registered; Operated; Re-derived.
 4. One chart: the test-surface matrix. No complexity index. No tool-convergence chart; the stack is a word in the row label.
