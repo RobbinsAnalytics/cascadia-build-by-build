@@ -843,3 +843,69 @@ What the reader now sees that the panel did not: a tenth row, in the
 Re-derived era, carrying all fourteen surfaces, with no diamond on it. The
 lede's first sentence still says "Nine Cascadia modules"; it is Aaron's
 accepted line and is left for him to rewrite.
+
+## Revision 2026-10-07 (Brief 4): a sixth era, one-seat revision read
+
+The era grouping changed: Cascadia Early Warning leaves Re-derived and opens a
+sixth era, Pre-registered (decision record D7, resolved). Its row's link
+targets moved too (D9): its case study to
+`cascadia-early-warning/case-study.html`, its cells to `main`. **By Aaron's
+decision (Build Brief 4, review budget) this revision gets one seat, not a
+panel:** a single naive reader shown only `docs/renders/matrix-320.png` and
+`docs/renders/matrix-1040.png`, returning the standard four items per screen
+plus one line on the eras.
+
+| Check | Result |
+|---|---|
+| `src/inventory.py` | refreeze against cascadia-early-warning at 3af3a40; re-run reproduces both files byte for byte |
+| `src/validate.py` | DOMAIN GATE: PASSED |
+| `src/build_page.py` | built; title and both annotations re-asserted; heading now "Six eras", counted from `page_text.ERAS` |
+| `src/render_charts.py` (K6) | 320, 519, 520, 871, 872, 1031, 1032, 1040: exit 0 |
+| 3.2, the title | unchanged and still true: build ten introduces no surface |
+
+### Seat 1 · Hiring manager (naive, one seat)
+
+Verbatim.
+
+**Screen A (320)**
+```
+SENTENCE  "It's a checklist grid of ten portfolio projects against fourteen kinds of
+          testing, showing that each new build added more checks. On the phone I can
+          only see the first six columns, though."
+NUMBER    "Fourteen. It's in the title" (title)
+QUESTION  "On a phone I can see columns 1 to 6. Where did the other eight surfaces show
+          up, and should I take the title's 'fourteen' on trust?"
+GAP       could not count the diamonds the subtitle asks for: columns 7 to 14 are
+          off-screen; the key is long; the prose below is skimmed
+```
+
+**Screen B (1040)**
+```
+SENTENCE  "One person built ten portfolio projects and added testing practices over
+          time. The first build had two kinds of checks, the last carries all
+          fourteen, and the big jump came at build four, the first Python build."
+NUMBER    "Five surfaces appear at once at build four." (annotation)
+QUESTION  "Some later builds drop surfaces an earlier build had ... Is that
+          deliberate, or did it regress?"
+GAP       no definition of a surface beyond its name; why empty cells are "not
+          debts"; how the standard's version rows relate to the marks
+ERAS      the five earlier labels "read as a rough story of a maturing practice";
+          "Pre-registered" "didn't make sense to me ... 'Pre-' sounds like something
+          that comes before registration, and an earlier era is already called
+          'Reviewed and registered', so it read as a step backwards". Best guess:
+          "the research sense: they wrote down their predictions or tests before
+          looking at the data. Nothing on the image confirms that."
+```
+
+### Disposition
+
+| # | Finding | New? | Disposition |
+|---|---|---|---|
+| R1 | "Pre-registered" read as a step backwards next to "Reviewed and registered"; the right meaning was guessed, not confirmed by the image | yes | **held for Aaron**: the era's meaning is stated in its era block under the matrix, as every era's is; no era label is defined on the matrix itself. The collision with "registered" is real. Alternative offered in the report: "Committed first". Not changed by the session, because the name is Aaron's call delegated to a draft and the seat is one reader |
+| R2 | phone shows six columns; diamonds cannot be counted there | no | as Round 1: the scroll hint and the 1040 state carry it; unchanged |
+| R3 | later builds lack surfaces earlier ones had | no | as panel finding 13: an empty cell is a fact, not a debt (spec rule 8); unchanged |
+| R4 | surfaces not defined beyond the name; lanes' relation to the marks | no | as Round 1: definitions live in `governance/surfaces.md`, linked from the page; unchanged |
+
+The seat's Screen B sentence carries the tenth row correctly ("the last
+carries all fourteen") and does not read it as a fifteenth surface. One seat
+is one reader: R1 is evidence, not a measurement.
