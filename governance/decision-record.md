@@ -156,7 +156,7 @@ and no second palette exists in the estate.
 **Carried by:** `docs/assets/cascadia.css` (`color-scheme: light`),
 `governance/chart-review.md` 5.7.
 
-## D7 · The tenth row: Cascadia Early Warning, in a sixth era, Pre-registered (resolved 2026-10-07)
+## D7 · The tenth row: Cascadia Early Warning, in a sixth era, Pre-specified (resolved 2026-10-07)
 
 Added 2026-10-07 from a session rooted in `cascadia-early-warning`, on a
 branch, with nothing merged. The row is read from disk like the other nine:
@@ -203,12 +203,17 @@ was anchored on the last row. Both now find the build that introduced the
 golden fixture and test that it is build nine with a running count of
 fourteen. The title and the annotation text are unchanged.
 
-*Resolved 2026-10-07, Build Brief 4.* **Early Warning opens a sixth era,
-Pre-registered.** Aaron delegated the call to a session draft; this is that
-draft, for his review. The name follows the pattern of the other five: each
+*Resolved 2026-10-07, Build Brief 4; renamed by Aaron the same day, Build
+Brief 4c.* **Early Warning opens a sixth era, Pre-specified.** Aaron
+delegated the call to a session draft, which named it "Pre-registered".
+A one-seat read (chart review R1) read that as a step back from the third
+era, "Reviewed and registered". Aaron chose "Pre-specified": it keeps the
+past-participle pattern, avoids the collision, and is the term FDA uses for
+analysis plans fixed before results exist. The name follows the pattern of the other five: each
 is named for what the era brought under test, as a past participle. What
 Early Warning brought that no earlier build did is a forecast harness, its
-periods and its promotion rule committed before the first forecast existed,
+periods and its promotion rule specified and committed before the first
+forecast existed,
 with the git log recording the order. Its other moves are earlier eras'
 (the second path is Re-derived's, the live edge Operated's), so they do not
 name it.
@@ -217,7 +222,7 @@ name it.
 row is the first to fill all fourteen columns, and an era named for that
 (complete, whole, full) would be the one era named for a count. That is a
 score in all but form, which the spec and the disclosure forbid. Nor is
-pre-registration a column, so the era's name is the one place the page can
+pre-specification a column, so the era's name is the one place the page can
 say what is new in the row.
 
 *The superseded claims, corrected here and on the page.* Early Warning's own
@@ -235,7 +240,7 @@ before the first forecast existed, not before the data was pulled).
 of its moves and silent about the one no other build made.
 
 **Carried by:** `src/inventory.py` (`ERAS`, the row's `era`);
-`src/page_text.py` (`ERAS["Pre-registered"]`, Re-derived's "next" line, the
+`src/page_text.py` (`ERAS["Pre-specified"]`, Re-derived's "next" line, the
 walk, `MODULE_LINES`); `src/build_page.py` (`ERA_SHY`, the eras heading, now
 counted from `page_text.ERAS`); `governance/spec.md` (standing decision 3,
 era membership, page section 3); `governance/chart-review.md` (the one-seat

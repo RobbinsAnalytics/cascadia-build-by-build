@@ -29,7 +29,7 @@
 
 1. Rows are the module repositories, nine at the freeze of 2026-09-16 and ten from the row added on 2026-10-07 (Cascadia Early Warning; decision record D7). Build by Build is not a row.
 2. The standard's version chain (VIZ-PRINCIPLES v1.0 to v2.8) is a thin second lane under the module rows.
-3. Six eras: Enterprise-shaped; Frozen and validated; Reviewed and registered; Operated; Re-derived; Pre-registered. Five from 2026-09-16; the sixth, Pre-registered, added 2026-10-07 for Cascadia Early Warning under Aaron's delegation (decision record D7, resolved).
+3. Six eras: Enterprise-shaped; Frozen and validated; Reviewed and registered; Operated; Re-derived; Pre-specified. Five from 2026-09-16; the sixth, Pre-specified, added 2026-10-07 for Cascadia Early Warning, named by Aaron (decision record D7, resolved).
 4. One chart: the test-surface matrix. No complexity index. No tool-convergence chart; the stack is a word in the row label.
 5. No page-level "still trusted, not tested" section. Question three of the retro appears only inside the current build's retro block and as each era's "what the next era brought under test."
 6. The interview pivot is verbal. The page ends at a list of modules; Aaron continues.
@@ -95,7 +95,7 @@ Fourteen surfaces in four bands: **Data** (one-command rebuild; frozen source; s
 
 `retro`, when present: `{ "could_test_at_start": [..], "can_test_now": [..], "had_to_trust": [..], "next_under_test": [..], "written": "YYYY-MM-DD" }`. Part 1 sets it to null for every row. The retrospective skill, when Aaron creates it, writes it. Revenue Assurance has a formal retrospective in its Cowork project; if Aaron supplies it, Part 1 may fill that one row from it, verbatim, and no other.
 
-**Era membership** is fixed by this spec and carried in the file: Enterprise-shaped (Medical Devices, Pharmacy, Staffing); Frozen and validated (Finance); Reviewed and registered (Deal Desk, Control Tower); Operated (Matter Ledger, Fee Examiner); Re-derived (Revenue Assurance); Pre-registered (Early Warning, from 2026-10-07). A later build gets an era when its row is written.
+**Era membership** is fixed by this spec and carried in the file: Enterprise-shaped (Medical Devices, Pharmacy, Staffing); Frozen and validated (Finance); Reviewed and registered (Deal Desk, Control Tower); Operated (Matter Ledger, Fee Examiner); Re-derived (Revenue Assurance); Pre-specified (Early Warning, from 2026-10-07). A later build gets an era when its row is written.
 
 **Done when:** the four gates exit zero (`validate.py`, `validate_freeze.py` after the freeze commit, the test matrix, and the inventory re-run producing a byte-identical file); the text matrix is in the report; Aaron has read the numbers. **No page, no chart, no site change in Part 1.** Part 2 is briefed only after Aaron reads the matrix.
 

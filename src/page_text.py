@@ -141,7 +141,7 @@ ERAS = {
             "first forecast existed, a locked test held to them, and a scheduled "
             "run again, now beside a second derivation path."),
     },
-    "Pre-registered": {
+    "Pre-specified": {
         "tested": (
             "{link:Cascadia Early Warning} committed its forecast harness, its periods and its "
             "promotion rule before the first forecast existed, and the git log records the "
@@ -219,7 +219,7 @@ MODULE_LINES = {
         "golden fixture written first, and invoices reconciled to the month."),
     "cascadia-early-warning": (
         "Public FDA device-report counts for seven product codes: a forecast harness "
-        "registered before the first forecast existed; a locked test frozen after a documented harness repair; "
+        "specified before the first forecast existed; a locked test frozen after a documented harness repair; "
         "counts, forecasts, scores and review episodes re-derived down a second path; and a "
         "weekly live edge from publication."),
 }

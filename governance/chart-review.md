@@ -847,7 +847,8 @@ accepted line and is left for him to rewrite.
 ## Revision 2026-10-07 (Brief 4): a sixth era, one-seat revision read
 
 The era grouping changed: Cascadia Early Warning leaves Re-derived and opens a
-sixth era, Pre-registered (decision record D7, resolved). Its row's link
+sixth era, named Pre-registered when the seat read it and renamed Pre-specified
+by Aaron after R1 (decision record D7, resolved). Its row's link
 targets moved too (D9): its case study to
 `cascadia-early-warning/case-study.html`, its cells to `main`. **By Aaron's
 decision (Build Brief 4, review budget) this revision gets one seat, not a
@@ -901,7 +902,7 @@ ERAS      the five earlier labels "read as a rough story of a maturing practice"
 
 | # | Finding | New? | Disposition |
 |---|---|---|---|
-| R1 | "Pre-registered" read as a step backwards next to "Reviewed and registered"; the right meaning was guessed, not confirmed by the image | yes | **held for Aaron**: the era's meaning is stated in its era block under the matrix, as every era's is; no era label is defined on the matrix itself. The collision with "registered" is real. Alternative offered in the report: "Committed first". Not changed by the session, because the name is Aaron's call delegated to a draft and the seat is one reader |
+| R1 | "Pre-registered" read as a step backwards next to "Reviewed and registered"; the right meaning was guessed, not confirmed by the image | yes | **resolved 2026-10-07 (Brief 4c)**: Aaron renamed the era "Pre-specified", which keeps the past-participle pattern and does not collide with "registered"; the page and renders were rebuilt. No new read, by his decision. *Previously:* held for Aaron: the era's meaning is stated in its era block under the matrix, as every era's is; no era label is defined on the matrix itself. The collision with "registered" is real. Alternative offered in the report: "Committed first". Not changed by the session, because the name is Aaron's call delegated to a draft and the seat is one reader |
 | R2 | phone shows six columns; diamonds cannot be counted there | no | as Round 1: the scroll hint and the 1040 state carry it; unchanged |
 | R3 | later builds lack surfaces earlier ones had | no | as panel finding 13: an empty cell is a fact, not a debt (spec rule 8); unchanged |
 | R4 | surfaces not defined beyond the name; lanes' relation to the marks | no | as Round 1: definitions live in `governance/surfaces.md`, linked from the page; unchanged |

@@ -68,7 +68,7 @@ BAND_ABBR = {"Data": "D", "Numbers": "N", "Presentation": "P", "Operation": "O"}
 # Display-only soft hyphens for the era labels in their narrow sticky column.
 ERA_SHY = {"Enterprise-shaped": "Enter&shy;prise-shaped", "Frozen and validated": "Frozen and vali&shy;dated",
            "Reviewed and registered": "Re&shy;viewed and regis&shy;tered", "Operated": "Oper&shy;ated",
-           "Re-derived": "Re-derived", "Pre-registered": "Pre-regis&shy;tered"}
+           "Re-derived": "Re-derived", "Pre-specified": "Pre-spec&shy;ified"}
 BAND_START = {cols[0] for cols in list(BANDS.values())[1:]}
 MONTHS = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
 WORDS = ["zero", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine",

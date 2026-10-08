@@ -70,7 +70,7 @@ ERAS = (
     "Reviewed and registered",
     "Operated",
     "Re-derived",
-    "Pre-registered",
+    "Pre-specified",
 )
 
 # key: local directory name under C:\Projects. site_slug: projects/<slug>.qmd
@@ -108,12 +108,12 @@ ROWS = [
     # rule before the first forecast row; re-derives counts, forecast
     # arithmetic, scores and review episodes down a second path (DuckDB SQL
     # plus its own Python arithmetic); and runs a weekly live edge from
-    # publication. Pre-registration is the move no earlier build made, so it
+    # publication. Specifying the forecast first is the move no earlier build made, so it
     # opens the sixth era (decision record D7, resolved). Its case study is
     # served from its own Pages site, and its links resolve on main once its
     # build branch merges (D9).
     {"key": "cascadia-early-warning", "name": "Cascadia Early Warning",
-     "site_slug": "cascadia-early-warning", "era": "Pre-registered",
+     "site_slug": "cascadia-early-warning", "era": "Pre-specified",
      "stack": "Python, DuckDB, statsmodels, ECharts, scheduled pull",
      "case_study": "cascadia-early-warning/case-study.html", "link_branch": "main"},
 ]
