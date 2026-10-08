@@ -7,7 +7,7 @@
 # file is where the module says what it considers frozen.
 #
 # This module has no data of its own. What it freezes is the inventory it read
-# from the nine sibling repositories on the as-of date below. Advancing that
+# from the sibling module repositories on the as-of date below. Advancing that
 # date means re-running src/inventory.py and committing the diff as a
 # deliberate refreeze, never a side effect of a build.
 #
@@ -19,7 +19,7 @@
 [freeze]
 module = "cascadia-build-by-build"
 
-# The date the inventory was run against the nine siblings. A claim made out
+# The date the inventory was run against the siblings. A claim made out
 # loud on the page; advancing it is a deliberate act.
 as_of_date = "2026-10-07"
 

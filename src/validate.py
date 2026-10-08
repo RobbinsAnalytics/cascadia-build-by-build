@@ -4,8 +4,8 @@
 Checks the things governance/spec.md says must be true of the data layer:
 
   1. every row's repository exists beside this one, and the rows are exactly
-     the nine the spec fixes, in first_commit order
-  2. every row's era is one of the five, first_commit <= last_commit, retro is
+     the ones the spec fixes, in first_commit order
+  2. every row's era is one of the spec's eras, first_commit <= last_commit, retro is
      null, and every surface cell is a repo-relative path or null
   3. every filled cell's path exists on disk in the named sibling and is
      tracked in that sibling's index: the page's own test, applied before
@@ -89,7 +89,7 @@ def main() -> int:
     for r in builds:
         k = r["key"]
         if r["era"] not in inventory.ERAS:
-            fail(f"{k}: era {r['era']!r} is not one of the five")
+            fail(f"{k}: era {r['era']!r} is not one of the spec's eras")
         if not (r["first_commit"] <= r["last_commit"]):
             fail(f"{k}: first_commit {r['first_commit']} after last_commit {r['last_commit']}")
         if r["retro"] is not None:
@@ -113,6 +113,10 @@ def main() -> int:
         if r["remote"] != expected:
             fail(f"{k}: remote {r['remote']!r} does not follow REMOTE-CONVENTION "
                  f"(expected {expected!r})")
+        # D9: a row that fixes link_branch links there, not where it was read.
+        lb = next((s.get("link_branch") for s in inventory.ROWS if s["key"] == k), None)
+        if lb and r["default_branch"] != lb:
+            fail(f"{k}: default_branch {r['default_branch']!r} is not the fixed link_branch {lb!r}")
     if not any("remote" in f or "default_branch" in f for f in failures):
         ok("remote and default_branch are set on every row and follow REMOTE-CONVENTION.md")
 

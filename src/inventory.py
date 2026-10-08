@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
-"""inventory.py: read the nine sibling module repositories and write the data.
+"""inventory.py: read the sibling module repositories and write the data.
 
 Cascadia Build by Build, Part 1. This module has no data of its own. Its source
-is the other nine module repositories, read-only, and the estate's standards
+is the other module repositories (ten since 2026-10-07), read-only, and the estate's standards
 repository for the thin lane of VIZ-PRINCIPLES versions.
 
     python src/inventory.py            write data/builds.json and data/standard.json
@@ -21,6 +21,12 @@ THE THREE RULES THIS SCRIPT LIVES UNDER
      origin's URL, and `default_branch`, the branch checked out at read time
      (Part 1 established each sibling sits on its default branch). The page
      links every cell to github.com/RobbinsAnalytics/<remote>/blob/<branch>/.
+     A row may fix `link_branch` where the branch read is not the one its
+     links must resolve on (a build read before it merges); the inventory
+     then requires that branch to exist and to be an ancestor of the HEAD it
+     read, so every path read lands on it with the merge (decision record D9).
+     A row may fix `case_study`, a site-relative path, where its case study is
+     not at projects/<site_slug>.html (D9).
   3. The detection rules are the paragraphs in governance/surfaces.md. The
      RULES table below implements them; where the two disagree, one is wrong.
      A cell is a repo-relative path or None, nothing else. Every path written
@@ -64,6 +70,7 @@ ERAS = (
     "Reviewed and registered",
     "Operated",
     "Re-derived",
+    "Pre-registered",
 )
 
 # key: local directory name under C:\Projects. site_slug: projects/<slug>.qmd
@@ -97,13 +104,18 @@ ROWS = [
     {"key": "cascadia-revenue-assurance", "name": "Cascadia Revenue Assurance",
      "site_slug": "cascadia-revenue-assurance", "era": "Re-derived",
      "stack": "Python, CSV, ECharts, DuckDB gate"},
-    # The tenth build. It re-derives every cell down a SQL path AND runs a
-    # scheduled live edge AND pre-registers its forecast before the first row;
-    # the spec's five eras end at "Re-derived", so it takes that era, and
-    # whether a sixth era is owed is Aaron's call (decision record D7).
+    # The tenth build. It commits its forecast harness, periods and promotion
+    # rule before the first forecast row; re-derives counts, forecast
+    # arithmetic, scores and review episodes down a second path (DuckDB SQL
+    # plus its own Python arithmetic); and runs a weekly live edge from
+    # publication. Pre-registration is the move no earlier build made, so it
+    # opens the sixth era (decision record D7, resolved). Its case study is
+    # served from its own Pages site, and its links resolve on main once its
+    # build branch merges (D9).
     {"key": "cascadia-early-warning", "name": "Cascadia Early Warning",
-     "site_slug": "cascadia-early-warning", "era": "Re-derived",
-     "stack": "Python, DuckDB, statsmodels, ECharts, scheduled pull"},
+     "site_slug": "cascadia-early-warning", "era": "Pre-registered",
+     "stack": "Python, DuckDB, statsmodels, ECharts, scheduled pull",
+     "case_study": "cascadia-early-warning/case-study.html", "link_branch": "main"},
 ]
 
 BANDS = {
@@ -310,20 +322,30 @@ def surfaces_for(row_key: str) -> dict[str, str | None]:
 
 
 def build_rows() -> tuple[list[dict], list[str]]:
-    """The nine rows, ordered by first_commit, plus provenance lines."""
+    """The rows, ordered by first_commit, plus provenance lines."""
     rows, provenance = [], []
     for spec in ROWS:
         repo = ESTATE / spec["key"]
         if not (repo / ".git").exists():
             raise RuntimeError(f"sibling repository missing: {repo}")
         if spec["era"] not in ERAS:
-            raise RuntimeError(f"{spec['key']}: era {spec['era']!r} is not one of the five")
+            raise RuntimeError(f"{spec['key']}: era {spec['era']!r} is not one of the spec's eras")
         first, last = commit_dates(repo)
         head = git(repo, "rev-parse", "--short", "HEAD").strip()
         branch = branch_of(repo)
         remote = remote_name(repo)
+        link_branch = spec.get("link_branch")
+        if link_branch:
+            # Read-only: rev-parse and merge-base take no lock.
+            try:
+                git(repo, "rev-parse", "--verify", "--quiet", f"refs/heads/{link_branch}")
+                git(repo, "merge-base", "--is-ancestor", link_branch, "HEAD")
+            except RuntimeError:
+                raise RuntimeError(f"{spec['key']}: link_branch {link_branch!r} is missing or "
+                                   f"is not an ancestor of the HEAD read") from None
         provenance.append(f"{spec['key']:34} branch={branch:8} remote={remote:28} "
-                          f"HEAD={head} first={first} last={last}")
+                          f"HEAD={head} first={first} last={last}"
+                          + (f" links-on={link_branch}" if link_branch else ""))
         cells = surfaces_for(spec["key"])
         for surface, rel in cells.items():
             if rel is not None and not (repo / rel).exists():
@@ -336,11 +358,12 @@ def build_rows() -> tuple[list[dict], list[str]]:
             "era": spec["era"],
             "stack": spec["stack"],
             "remote": remote,
-            "default_branch": branch,
+            "default_branch": link_branch or branch,
             "first_commit": first,
             "last_commit": last,
             "surfaces": cells,
             "retro": None,
+            **({"case_study": spec["case_study"]} if "case_study" in spec else {}),
         })
     rows.sort(key=lambda r: (r["first_commit"], r["key"]))
     return rows, provenance
@@ -398,7 +421,7 @@ def dumps(obj) -> str:
 
 
 def matrix_text(rows: list[dict]) -> str:
-    """The matrix as text: nine rows by fourteen columns, then the paths."""
+    """The matrix as text: one row per build by fourteen columns, then the paths."""
     cols = SURFACES
     head = f"{'row':34} " + " ".join(f"{i + 1:>2}" for i in range(len(cols)))
     lines = [head]

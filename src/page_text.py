@@ -15,12 +15,17 @@ Tokens the builder understands, and fails the build on if unknown:
 
 Two lines were drafted for Aaron's rewrite, LEDE_AARON and CLOSING_AARON,
 quoted in the Part 2 report; he read the page and accepted them on 2026-09-17.
+On 2026-10-07 Aaron delegated drafting them to the session for analytics work,
+reviewing after (decision record D8); LEDE_AARON was redrafted under that for
+ten modules.
 House style: no em dashes; US spelling.
 """
 
 # The lede's first sentence. Drafted by the build session; Aaron read the page
-# with it on 2026-09-17 and accepted it as it stands.
-LEDE_AARON = ("Nine Cascadia modules, built one after another over four months, and the "
+# with it on 2026-09-17 and accepted it. Redrafted 2026-10-07 for the tenth
+# module under D8, for his review: only the count changed; the span, first
+# commit 2026-06-11 to last 2026-10-07, is still under four months.
+LEDE_AARON = ("Ten Cascadia modules, built one after another over four months, and the "
               "tests each one could carry when it shipped.")
 
 LEDE_SECOND = ("Every filled cell links to the file on GitHub that it names. An empty cell "
@@ -49,7 +54,7 @@ ANNOTATION_SECONDARY = "Build four, the first Python build: {firsts} surfaces ap
 LANE_UNDATED = "v1.0, v2.0 and v2.1: undated, before the standard had a repository."
 LANE_LABEL = "Design standard VIZ-PRINCIPLES"
 
-# Five eras, three lines each: what could be tested, what had to be trusted,
+# Six eras, three lines each: what could be tested, what had to be trusted,
 # what the next era brought under test. Written from the matrix.
 ERAS = {
     "Enterprise-shaped": {
@@ -132,12 +137,31 @@ ERAS = {
             "result and do not commit it; and operation over time, since nothing runs on a "
             "schedule."),
         "next": (
-            "Nothing is under test for a tenth build yet. No row exists for it, and no "
+            "A forecast whose harness, periods and promotion rule were committed before the "
+            "first forecast existed, a locked test held to them, and a scheduled "
+            "run again, now beside a second derivation path."),
+    },
+    "Pre-registered": {
+        "tested": (
+            "{link:Cascadia Early Warning} committed its forecast harness, its periods and its "
+            "promotion rule before the first forecast existed, and the git log records the "
+            "order. One corrected result was frozen after a documented harness repair; "
+            "promotion and point forecasts were unchanged. Counts, forecast arithmetic, scores "
+            "and review episodes are re-derived down a second path (DuckDB SQL plus its own "
+            "Python arithmetic), and a live edge, weekly from publication, scores a forecast "
+            "when its month first appears in the source."),
+        "trusted": (
+            "The promotion judgement, which no second path re-applies; the recall context, "
+            "checked against hand-verified events rather than re-derived; and the source "
+            "itself, which openFDA revises weekly and in place, so the freeze is a hash of "
+            "what was read, not a claim that the counts stop moving."),
+        "next": (
+            "Nothing is under test for an eleventh build yet. No row exists for it, and no "
             "retrospective has been written for this one."),
     },
 }
 
-# The walk: era by era, short, then the nine modules one line each.
+# The walk: era by era, short, then the modules one line each.
 WALK = [
     ("The first three builds were shaped like enterprise work: a SQL Server star schema, "
      "a Power BI report, and one script that rebuilt the whole thing and printed a "
@@ -157,6 +181,9 @@ WALK = [
      "its own failures, and every published cell re-derived a second way."),
     ("{link:Cascadia Revenue Assurance} wrote the rules first, the golden fixture second and "
      "two engines third, and published nothing until all of them agreed."),
+    ("{link:Cascadia Early Warning} committed its forecast and the rule that judges it before "
+     "the first forecast existed, kept the second path, and runs a weekly live edge from "
+     "publication."),
 ]
 
 WALK_LIST_INTRO = "Ten modules, oldest first."
@@ -191,9 +218,10 @@ MODULE_LINES = {
         "A synthetic subscription book: two derivation paths from one rules document, a "
         "golden fixture written first, and invoices reconciled to the month."),
     "cascadia-early-warning": (
-        "Public FDA device-report counts for seven product codes: a forecast pre-registered "
-        "before its first row, a locked test run once, every cell re-derived in SQL, and a "
-        "weekly live edge that scores each forecast as its month elapses."),
+        "Public FDA device-report counts for seven product codes: a forecast harness "
+        "registered before the first forecast existed; a locked test frozen after a documented harness repair; "
+        "counts, forecasts, scores and review episodes re-derived down a second path; and a "
+        "weekly live edge from publication."),
 }
 
 # The walk's closing line. Drafted by the build session; accepted by Aaron on

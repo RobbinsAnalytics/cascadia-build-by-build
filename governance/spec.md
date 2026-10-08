@@ -29,7 +29,7 @@
 
 1. Rows are the module repositories, nine at the freeze of 2026-09-16 and ten from the row added on 2026-10-07 (Cascadia Early Warning; decision record D7). Build by Build is not a row.
 2. The standard's version chain (VIZ-PRINCIPLES v1.0 to v2.8) is a thin second lane under the module rows.
-3. Five eras: Enterprise-shaped; Frozen and validated; Reviewed and registered; Operated; Re-derived.
+3. Six eras: Enterprise-shaped; Frozen and validated; Reviewed and registered; Operated; Re-derived; Pre-registered. Five from 2026-09-16; the sixth, Pre-registered, added 2026-10-07 for Cascadia Early Warning under Aaron's delegation (decision record D7, resolved).
 4. One chart: the test-surface matrix. No complexity index. No tool-convergence chart; the stack is a word in the row label.
 5. No page-level "still trusted, not tested" section. Question three of the retro appears only inside the current build's retro block and as each era's "what the next era brought under test."
 6. The interview pivot is verbal. The page ends at a list of modules; Aaron continues.
@@ -52,7 +52,7 @@ Rooted in `cascadia-build-by-build`. Branch `build/part1-inventory`.
 
 **Produces**
 
-- `src/inventory.py`: reads the nine sibling repositories read-only, writes `data/builds.json`. Never writes outside this repo. Never runs `git status` in a sibling.
+- `src/inventory.py`: reads the sibling module repositories read-only, writes `data/builds.json`. Never writes outside this repo. Never runs `git status` in a sibling.
 - `data/builds.json`: one entry per row, schema below.
 - `data/standard.json`: the thin lane. One entry per VIZ-PRINCIPLES version, with the date each version landed, read from `cascadia-standards` (change-log headings at `design-system/VIZ-PRINCIPLES.md` and the archive, dated from that repo's log).
 - `governance/surfaces.md`: the column definitions, one paragraph each: what the surface is, what artifact counts as evidence, what does not.
@@ -95,7 +95,7 @@ Fourteen surfaces in four bands: **Data** (one-command rebuild; frozen source; s
 
 `retro`, when present: `{ "could_test_at_start": [..], "can_test_now": [..], "had_to_trust": [..], "next_under_test": [..], "written": "YYYY-MM-DD" }`. Part 1 sets it to null for every row. The retrospective skill, when Aaron creates it, writes it. Revenue Assurance has a formal retrospective in its Cowork project; if Aaron supplies it, Part 1 may fill that one row from it, verbatim, and no other.
 
-**Era membership** is fixed by this spec and carried in the file: Enterprise-shaped (Medical Devices, Pharmacy, Staffing); Frozen and validated (Finance); Reviewed and registered (Deal Desk, Control Tower); Operated (Matter Ledger, Fee Examiner); Re-derived (Revenue Assurance). A later build gets an era when its row is written.
+**Era membership** is fixed by this spec and carried in the file: Enterprise-shaped (Medical Devices, Pharmacy, Staffing); Frozen and validated (Finance); Reviewed and registered (Deal Desk, Control Tower); Operated (Matter Ledger, Fee Examiner); Re-derived (Revenue Assurance); Pre-registered (Early Warning, from 2026-10-07). A later build gets an era when its row is written.
 
 **Done when:** the four gates exit zero (`validate.py`, `validate_freeze.py` after the freeze commit, the test matrix, and the inventory re-run producing a byte-identical file); the text matrix is in the report; Aaron has read the numbers. **No page, no chart, no site change in Part 1.** Part 2 is briefed only after Aaron reads the matrix.
 
@@ -107,8 +107,8 @@ Rooted in `cascadia-build-by-build`. Branch `build/part2-page`. Briefed from thi
 
 1. **Lede.** Title "Build by Build". One sentence saying what the page is and that every filled cell links to the file it names. The motto is the site's, not repeated as a slogan here.
 2. **The matrix.** Rows oldest at top; the fourteen columns in their four bands; a filled cell is a link, an empty cell is empty; the stack as a word in the row label; the era as a group label down the left; the standard's versions as a thin lane beneath, positioned by date. Title carries what the plot shows (Rule 7.1). Working title, to be tested by the panel: "Each build kept every test the last one had." No colour scale. No score.
-3. **Eras.** Five blocks. Each: what could be tested, what had to be trusted, what the next era brought under test. Three lines. Each names its modules with links. The current build's block carries its four retro questions in full when a retro exists in the data; until then, the same three lines.
-4. **The walk.** Era by era in short prose, ending in a list of the nine modules with one line each. The page stops there.
+3. **Eras.** One block per era, six from 2026-10-07. Each: what could be tested, what had to be trusted, what the next era brought under test. Three lines. Each names its modules with links. The current build's block carries its four retro questions in full when a retro exists in the data; until then, the same three lines.
+4. **The walk.** Era by era in short prose, ending in a list of the modules with one line each. The page stops there.
 5. **Provenance strip.** Generated date, `builds.json` freeze, standard HEAD, per Rule 4.2.
 
 Everything on the page is generated from the two data files except the era prose and the walk, which live in `src/` as text the builder inlines. Era prose is Aaron's voice; Part 2 drafts it and reports it for his edit before publish.

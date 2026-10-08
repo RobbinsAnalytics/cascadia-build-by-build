@@ -252,11 +252,12 @@
     }
   },
   {
-    "default_branch": "build/early-warning",
-    "era": "Re-derived",
+    "case_study": "cascadia-early-warning/case-study.html",
+    "default_branch": "main",
+    "era": "Pre-registered",
     "first_commit": "2026-10-06",
     "key": "cascadia-early-warning",
-    "last_commit": "2026-10-06",
+    "last_commit": "2026-10-07",
     "name": "Cascadia Early Warning",
     "remote": "cascadia-early-warning",
     "retro": null,

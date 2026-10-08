@@ -68,7 +68,7 @@ BAND_ABBR = {"Data": "D", "Numbers": "N", "Presentation": "P", "Operation": "O"}
 # Display-only soft hyphens for the era labels in their narrow sticky column.
 ERA_SHY = {"Enterprise-shaped": "Enter&shy;prise-shaped", "Frozen and validated": "Frozen and vali&shy;dated",
            "Reviewed and registered": "Re&shy;viewed and regis&shy;tered", "Operated": "Oper&shy;ated",
-           "Re-derived": "Re-derived"}
+           "Re-derived": "Re-derived", "Pre-registered": "Pre-regis&shy;tered"}
 BAND_START = {cols[0] for cols in list(BANDS.values())[1:]}
 MONTHS = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
 WORDS = ["zero", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine",
@@ -137,6 +137,10 @@ def cell_url(r: dict, path: str) -> str:
 
 
 def case_study_url(r: dict) -> str:
+    # A row that fixes its case study's site-relative path links there (D9);
+    # every other row's case study is projects/<site_slug>.html.
+    if r.get("case_study"):
+        return f"{SITE}/{r['case_study']}"
     return f"{SITE}/projects/{r['site_slug']}.html"
 
 
@@ -591,7 +595,7 @@ TEMPLATE = """<!DOCTYPE html>
   <div class="cascadia-provenance" role="note"><span class="tick"></span><span>@@prov1@@</span> · <span>@@prov2@@</span> · <span>@@prov3@@</span></div>
 </div>
 
-<h2>Five eras</h2>
+<h2>@@eras_h@@</h2>
 @@eras@@
 
 <h2>The walk</h2>
@@ -644,6 +648,7 @@ def main() -> int:
         "hint": esc(T.SCROLL_HINT.format(n=WORDS[len(SURFACES)])),
         "prov1": esc(prov[0]), "prov2": esc(prov[1]), "prov3": esc(prov[2]),
         "eras": eras_html(builds, F), "walk": walk_html(builds, F),
+        "eras_h": f"{WORDS[len(T.ERAS)].capitalize()} eras",
         "disclosure": esc(T.DISCLOSURE), "repo_url": REPO_URL, "as_of": esc(as_of),
         "freeze_short": baseline[:7],
     }.items():

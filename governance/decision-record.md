@@ -156,7 +156,7 @@ and no second palette exists in the estate.
 **Carried by:** `docs/assets/cascadia.css` (`color-scheme: light`),
 `governance/chart-review.md` 5.7.
 
-## D7 · The tenth row: Cascadia Early Warning, in the Re-derived era, pending Aaron's call on a sixth
+## D7 · The tenth row: Cascadia Early Warning, in a sixth era, Pre-registered (resolved 2026-10-07)
 
 Added 2026-10-07 from a session rooted in `cascadia-early-warning`, on a
 branch, with nothing merged. The row is read from disk like the other nine:
@@ -165,11 +165,16 @@ files, and `data/builds.json` is regenerated, not edited.
 
 **The era.** The spec fixes five eras and says a later build gets an era when
 its row is written. Early Warning re-derives every published cell down a
-separately written SQL path (the Re-derived move), runs a scheduled live edge
+separately written SQL path (the Re-derived move; *superseded wording, see
+the resolution below: the second path covers counts, forecast arithmetic,
+scores and review episodes, not every cell*), runs a scheduled live edge
 with health and a published reconciliation (the Operated move), and adds a
 move no earlier build made: the forecast harness, its periods and its
 promotion rule are committed before the first forecast row, the locked test
-runs once, and the validator reads the git log to prove both. It takes the
+runs once, and the validator reads the git log to prove both. *(Superseded
+wording, see the resolution below: one corrected locked-test result was frozen
+after a documented harness repair, and it is the page builder, not the
+validator, that reads the git log.)* It takes the
 latest era the spec defines, Re-derived, because an era is a label for a
 period of the portfolio and not a score, and because inventing a sixth era
 ("Pre-registered") is a change to the spec that only Aaron makes.
@@ -197,3 +202,93 @@ tested the last row's running count and index, and the primary annotation
 was anchored on the last row. Both now find the build that introduced the
 golden fixture and test that it is build nine with a running count of
 fourteen. The title and the annotation text are unchanged.
+
+*Resolved 2026-10-07, Build Brief 4.* **Early Warning opens a sixth era,
+Pre-registered.** Aaron delegated the call to a session draft; this is that
+draft, for his review. The name follows the pattern of the other five: each
+is named for what the era brought under test, as a past participle. What
+Early Warning brought that no earlier build did is a forecast harness, its
+periods and its promotion rule committed before the first forecast existed,
+with the git log recording the order. Its other moves are earlier eras'
+(the second path is Re-derived's, the live edge Operated's), so they do not
+name it.
+
+*The name the matrix might have argued for, and why not.* Early Warning's
+row is the first to fill all fourteen columns, and an era named for that
+(complete, whole, full) would be the one era named for a count. That is a
+score in all but form, which the spec and the disclosure forbid. Nor is
+pre-registration a column, so the era's name is the one place the page can
+say what is new in the row.
+
+*The superseded claims, corrected here and on the page.* Early Warning's own
+correction passes (its decision records D19 to D21) replaced claims this
+row's first draft repeated: "run once" (one corrected result was frozen
+after a documented harness repair; promotion and point forecasts were
+unchanged), "every cell re-derived in SQL" (counts, forecast arithmetic,
+scores and review episodes, down a second path of DuckDB SQL plus its own
+Python arithmetic), "scores each forecast as its month elapses" (the live
+edge scores a forecast when its month first appears in the source, weekly
+from publication), and "pre-registered before its first row" (registered
+before the first forecast existed, not before the data was pulled).
+
+*Counterfactual:* keeping Early Warning in Re-derived, which is true of one
+of its moves and silent about the one no other build made.
+
+**Carried by:** `src/inventory.py` (`ERAS`, the row's `era`);
+`src/page_text.py` (`ERAS["Pre-registered"]`, Re-derived's "next" line, the
+walk, `MODULE_LINES`); `src/build_page.py` (`ERA_SHY`, the eras heading, now
+counted from `page_text.ERAS`); `governance/spec.md` (standing decision 3,
+era membership, page section 3); `governance/chart-review.md` (the one-seat
+revision read).
+
+## D8 · The two [AARON] lines may be drafted by a session, for Aaron's review
+
+Added 2026-10-07, Build Brief 4. `CLAUDE.md` and `src/page_text.py` say the
+two lines marked `[AARON]`, `LEDE_AARON` and `CLOSING_AARON`, ship in Aaron's
+words. Aaron, 2026-10-07: for analytics work, Claude may draft openings and
+closings; he reviews after. Under that, `LEDE_AARON` is redrafted for ten
+modules ("Ten Cascadia modules, built one after another over four months,
+and the tests each one could carry when it shipped."); the span, first commit
+2026-06-11 to last 2026-10-07, is still under four months, so only the count
+changed. `CLOSING_AARON` is still true and is unchanged.
+
+`CLAUDE.md`'s rule is not rewritten from this session; that is recorded as a
+build-forward candidate, so until it is, this record is where the delegation
+lives.
+
+*Counterfactual:* holding the page at "Nine Cascadia modules" over a
+ten-row table until Aaron rewrote the line, which is how D7 left it.
+
+**Carried by:** `src/page_text.py` (`LEDE_AARON` and its comment);
+`src/build_page.py` (prints both lines on every build).
+
+## D9 · A row may fix its case-study path and the branch its links resolve on
+
+Added 2026-10-07, Build Brief 4. Two exceptions to D3's "read, not fixed",
+each an explicit per-row field in `ROWS` rather than a special case in the
+page builder, and each carried by one row today, Early Warning.
+
+**`case_study`.** Every other row's case study is
+`projects/<site_slug>.html` on the site. Early Warning's moved into its own
+repository and is served at `cascadia-early-warning/case-study.html`; the
+old `projects/` path is a redirect stub. The field is a site-relative path
+and is written to `data/builds.json` only on a row that fixes it, so no
+other row's data or link changes.
+
+**`link_branch`.** D3 links every cell at the branch checked out when the
+inventory read the sibling. Early Warning was read on its unmerged build
+branch, which will not outlive the merge, so its row fixes `main`. The
+inventory requires that `main` exists in the sibling and is an ancestor of
+the HEAD it read, so every path it resolved lands on `main` when the build
+branch merges; `validate.py` checks the frozen `default_branch` equals the
+fixed one. Until Early Warning merges, its cell links resolve only on its
+build branch, which is why it merges before this page publishes. That
+ordering is a claim about state; nothing here observes the merge.
+
+*Counterfactual:* linking at `build/early-warning`, which would point every
+cell in the row at a branch deleted on merge; or a special case in
+`build_page.py`, which would put data in the builder (D3).
+
+**Carried by:** `src/inventory.py` (`ROWS`, `build_rows`);
+`src/validate.py` (check 2b); `src/build_page.py` (`case_study_url`);
+`data/builds.json`.
