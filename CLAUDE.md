@@ -70,14 +70,14 @@ has already paid for; regenerate instead. The column definitions in
 `governance/surfaces.md` and the constants at the top of `src/inventory.py`
 are the authored layer.
 
-**Know this about the template gate before trusting it: it cannot tell an
-untracked file from an unchanged one.** `src/validate_freeze.py` is the estate
-template verbatim (parking lot 8a). It compares with
-`git diff --quiet <baseline> -- <path>`, and an untracked path produces no
-diff, so a protected file that exists on disk but was never committed passes.
-**A passing gate is therefore a claim about committed files only.** Check
-`git status` in this repository too. The template carries this defect
-estate-wide until a `cascadia-standards` session fixes it.
+**The template gate resolves against git, not the filesystem (template
+v1.1.0, 2026-10-14).** `src/validate_freeze.py` is the estate template
+verbatim. Until v1.1.0 it expanded patterns on disk and compared with
+`git diff --quiet <baseline> -- <path>`, so a protected file that existed on
+disk but was never committed passed (parking lot 8a). It now resolves each
+pattern against the baseline tree, the index and untracked paths, and an
+untracked file under a protected pattern or a deleted wildcard sibling fails.
+It prints how many paths it resolved and checked; read the number there.
 
 ## Stage 2: the page, built from the two data files only
 
@@ -125,8 +125,7 @@ that the matrix cannot check the mode on Windows, where `core.fileMode` is
 false: the index listing is the check, and it is a check of state, not
 behaviour.
 
-**This repo has no entry in
-`cascadia-standards/governance/hook_manifest.json` yet.** That entry is
-authored from a session rooted in `cascadia-standards`, never from here, and
-`check_hook_drift.py` exits 3 estate-wide until it lands. Fee Examiner and
-Revenue Assurance each went through the same gap; it is not a defect.
+**This repo is declared in `cascadia-standards/governance/hook_manifest.json`**
+(2026-10-13: `lifecycle: active`). That entry is authored and maintained from
+a session rooted in `cascadia-standards`, never from here; `check_hook_drift.py`
+is the authority on the current state of this repo's guards, not this file.
