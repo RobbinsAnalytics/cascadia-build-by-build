@@ -17,6 +17,7 @@
     button.setAttribute('aria-pressed','true');
     const row = builds.get(button.dataset.build), s = surfaces.get(button.dataset.surface);
     const c = data.cells[row.key][s.id];
+    if (!panel) return;  // the selected-evidence panel was removed (owner, 2026-10-19)
     panel.replaceChildren(node('p', 'Selected evidence / '+row.name, 'eyebrow'),
       node('h3', String(s.number).padStart(2,'0')+' · '+s.label),
       node('span', stateNames[c.state]+' / recorded result: '+c.result, 'result '+c.state),
