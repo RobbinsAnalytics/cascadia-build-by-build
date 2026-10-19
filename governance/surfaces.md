@@ -230,3 +230,43 @@ the nine repositories rather than before.
 8. `reconciliation_published`: "including failures" rather than "including
    failed runs", because the spec's wording is the durable one and only Matter
    Ledger's reconciliation is about runs.
+
+---
+
+## Portfolio extension, 2026-10-19
+
+The original fourteen definitions above and their October 7 inventory remain
+unchanged. This extension adds two columns to this portfolio inventory. It does
+not change the shared standards repository or declare either surface complete
+in any build. `data/builds-expanded.json` records artifact paths;
+`data/cell-evidence.json` separately records scope and outcomes. A report can
+exist while its check fails or its coverage is limited. Such evidence is shown
+as limited, never as a completed surface. The first ten builds were not assessed
+against the two additional definitions and carry an explicit not-assessed state.
+No first-ever capability claim is made for these new columns.
+
+### Surface 15. `expected_event_accounting` | Operation
+
+The build derives expected work and response evidence from independently retained request/disposition/service, profile and submission facts, then accounts for every obligation at a stated cutoff. It preserves obligations even when no downstream record arrives.
+
+Its distinct claim is the independent expected population plus due times, conditional activation/cancellation, state transitions and historical deadline outcomes. Surface 14 reconciles and publishes the populations/residuals; it need not generate this obligation contract. Absence accounting remains essential here, including never-built claims and encounters. Common evidence can support both surfaces without merging their purposes or dropping either requirement.
+
+**Counts:** committed `governance/expected-event-accounting.md`, headed `Expected event accounting`, with `governance/obligations.jsonl`, an obligation-contract version, independent triggering-population fingerprints, evaluation cutoff, and the executed named check `expected_events_accounted`. Each obligation records its kind, triggering fact, client/recipient/purpose, stage and grain, rule version, timing status, due time or explicit null with reason, matched evidence/outcome if any, and satisfaction state. Timed obligations distinguish satisfied on time, satisfied late, pending, overdue and justified cancellation; known business satisfaction with unknown effective time is satisfied with timing undetermined and supplies no SLA conclusion. Untimed established requirements remain satisfied or unresolved with timing undetermined; no fabricated due time supplies an SLA result. Report expected and disposition counts, unmatched evidence, every unresolved obligation, and complete population reconciliation. A timely rejection satisfies a response-receipt obligation while leaving accepted-service coverage unresolved. Accounting state must never promote a rejection to acceptance. P and U membership must be established from independent source/disposition facts and rules before reading constructed claims or submissions. Claim-header counts cannot replace source-unit allocation coverage. A failed promised return remains expected; where no return promise is established, retain the outcome-evidence gap without inventing an overdue receipt. The obligation source must not be derived from existing claims, received responses or the exact resolver being tested.
+
+Record effective cutoff T, receipt cutoff K, each obligation's trigger/due-time basis, the matched evidence's effective and received times, historical deadline outcome, state at the stated cutoff, and any later resolution. An internal follow-up target is separately labeled and cannot substitute for an unknown contractual due time. Satisfaction and timing are independently represented, including satisfied with timing undetermined. Receipt obligations use received time for timeliness and only receipts available by both T and K for historical state. Later business-effective evidence cannot backdate receipt, activation, or cancellation and erase a historical receipt violation. An approved correction to the recorded receipt facts must be separately identified.
+
+**Does not count:** job health, received-row totals, absence inferred only from a response table, missing claims or legitimately unknown due times dropped from the population, obligations that disappear on quarantine, unsubstantiated cancellation, or a ledger that silently excludes never-built services. Correctly reported overdue obligations are evidence, not grounds to hide the surface.
+
+**Inventory detection:** require the committed report heading, contract and ledger references, named-check outcome, mandatory identity and timing fields, T/K bindings, trigger/due-time basis, historical deadline outcome, later-resolution fields, unique obligation keys, and reconciliation of state totals to the ledger. Validate structure and references without running the module. Static inventory inspection does not execute those controls; the module's retained seeded-execution records provide their behavioral evidence.
+
+### Surface 16. `detection_evaluation` | Numbers
+
+A locked evaluation measures whether controls detect independently labeled failures, remain quiet on clean opportunities, and detect within the stated time window. It publishes the complete evaluation population, including misses and unobservable cases.
+
+This surface owns population-level scoring and evaluator validity, including the disabled-detector, always-alert and missing-row mutants. Surface 9 retains diagnostic injections, reachability and paired clean controls for individual checks. Cross-reference shared executions rather than removing diagnostic specificity or copying inconsistent outcomes. The linked module evaluation protocol supplies the detailed procedure; its existence does not establish that every requirement was met.
+
+**Counts:** committed `governance/detection-evaluation.md` with headings `Detection evaluation` and `Evaluator can fail`, linked to `governance/evaluation-protocol.md`, the precommitted truth-key identity, and `governance/detection-results.json`. Evidence includes actual detector/evaluator input separation, frozen detector output before key disclosure, per-class eligible targets and clean opportunities, matched detections, misses, false alarms, duplicate/unmatched alerts, not-yet-observable cases, and latency with unresolved cases retained. Record outcomes for a disabled detector, an always-alert detector, and a missing-scoring-row mutant. The truth and scoring rules cannot be supplied solely by the implementation under evaluation.
+
+**Does not count:** a selected list of successful corruptions, aggregate accuracy alone, output-derived expectations, a committed hash described as proof of secrecy, caught-only latency described as overall latency, omitted held-out attempts, or a harness that succeeds after detector output disappears. Honest misses remain in the report; a surface is present even when the measured result blocks certification.
+
+**Inventory detection:** require the report headings, protocol, access and output-lock records, commitment references, complete per-instance result schema, cohort bindings, and evaluator-mutant receipts. Recompute simple report totals from the committed event-level results, including all eligible and censored cases. Inspect declared commit ancestry and version references without executing sibling code. Static inspection cannot certify that no person saw an answer key.

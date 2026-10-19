@@ -1,0 +1,62 @@
+[
+  {
+    "basis": "no commit in cascadia-standards introduces this version's header; the log cannot settle a date",
+    "commit": null,
+    "date": null,
+    "version": "1.0"
+  },
+  {
+    "basis": "no commit in cascadia-standards introduces this version's header; the log cannot settle a date",
+    "commit": null,
+    "date": null,
+    "version": "2.0"
+  },
+  {
+    "basis": "no commit in cascadia-standards introduces this version's header; the log cannot settle a date",
+    "commit": null,
+    "date": null,
+    "version": "2.1"
+  },
+  {
+    "basis": "header first appears at ef48487: Stand up cascadia-standards: principles, freeze template, starter kit; a root commit, so the document entered the log already at this version and the date is an upper bound on when it landed",
+    "commit": "ef4848785629a106c59107711d74be3d945fb7a8",
+    "date": "2026-08-05",
+    "version": "2.2"
+  },
+  {
+    "basis": "header first appears at 78642fa: Version, change log v2.2 -> v2.3, and open items 15-19",
+    "commit": "78642faa23542db7eef3a6e8b540c9e4cbd1dd87",
+    "date": "2026-08-10",
+    "version": "2.3"
+  },
+  {
+    "basis": "header first appears at 1f22927: v2.4: close open item 14, correct open item 16, draft a retroactivity policy",
+    "commit": "1f229271d247ecaeaa68b078f30e537152dd95ab",
+    "date": "2026-08-10",
+    "version": "2.4"
+  },
+  {
+    "basis": "header first appears at b889ba4: v2.5: close open items 15 and 16, and give Rule 7.4 a width",
+    "commit": "b889ba409930c626b1adccbb3e94847d69d88331",
+    "date": "2026-08-10",
+    "version": "2.5"
+  },
+  {
+    "basis": "header first appears at f8ea927: Adopt the retroactivity convention as v2.6, and declare v2.1 through v2.5",
+    "commit": "f8ea9271dcba8f67261d325586d2d8b48b52b552",
+    "date": "2026-08-24",
+    "version": "2.6"
+  },
+  {
+    "basis": "header first appears at fc854ac: Write in open item 19's three clauses as v2.7, and declare each one",
+    "commit": "fc854ac607a7368b44655bc615181da6aae2f4ce",
+    "date": "2026-08-25",
+    "version": "2.7"
+  },
+  {
+    "basis": "header first appears at 0c9d487: Repair the K6 that could not fail what it asked for",
+    "commit": "0c9d48795ee7667a91fddcec7f00ed61649ca50b",
+    "date": "2026-08-29",
+    "version": "2.8"
+  }
+]
