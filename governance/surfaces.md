@@ -236,13 +236,13 @@ the nine repositories rather than before.
 ## Portfolio extension, 2026-10-19
 
 The original fourteen definitions above and their October 7 inventory remain
-unchanged. This extension adds two columns to this portfolio inventory. It does
-not change the shared standards repository or declare either surface complete
+unchanged. This extension adds one column to this portfolio inventory. It does
+not change the shared standards repository or declare the additional surface complete
 in any build. `data/builds-expanded.json` records artifact paths;
 `data/cell-evidence.json` separately records scope and outcomes. A report can
 exist while its check fails or its coverage is limited. Such evidence is shown
 as limited, never as a completed surface. The first ten builds were not assessed
-against the two additional definitions and carry an explicit not-assessed state.
+against the additional definition and carry an explicit not-assessed state.
 No first-ever capability claim is made for these new columns.
 
 ### Surface 15. `expected_event_accounting` | Operation
@@ -258,15 +258,3 @@ Record effective cutoff T, receipt cutoff K, each obligation's trigger/due-time 
 **Does not count:** job health, received-row totals, absence inferred only from a response table, missing claims or legitimately unknown due times dropped from the population, obligations that disappear on quarantine, unsubstantiated cancellation, or a ledger that silently excludes never-built services. Correctly reported overdue obligations are evidence, not grounds to hide the surface.
 
 **Inventory detection:** require the committed report heading, contract and ledger references, named-check outcome, mandatory identity and timing fields, T/K bindings, trigger/due-time basis, historical deadline outcome, later-resolution fields, unique obligation keys, and reconciliation of state totals to the ledger. Validate structure and references without running the module. Static inventory inspection does not execute those controls; the module's retained seeded-execution records provide their behavioral evidence.
-
-### Surface 16. `detection_evaluation` | Numbers
-
-A locked evaluation measures whether controls detect independently labeled failures, remain quiet on clean opportunities, and detect within the stated time window. It publishes the complete evaluation population, including misses and unobservable cases.
-
-This surface owns population-level scoring and evaluator validity, including the disabled-detector, always-alert and missing-row mutants. Surface 9 retains diagnostic injections, reachability and paired clean controls for individual checks. Cross-reference shared executions rather than removing diagnostic specificity or copying inconsistent outcomes. The linked module evaluation protocol supplies the detailed procedure; its existence does not establish that every requirement was met.
-
-**Counts:** committed `governance/detection-evaluation.md` with headings `Detection evaluation` and `Evaluator can fail`, linked to `governance/evaluation-protocol.md`, the precommitted truth-key identity, and `governance/detection-results.json`. Evidence includes actual detector/evaluator input separation, frozen detector output before key disclosure, per-class eligible targets and clean opportunities, matched detections, misses, false alarms, duplicate/unmatched alerts, not-yet-observable cases, and latency with unresolved cases retained. Record outcomes for a disabled detector, an always-alert detector, and a missing-scoring-row mutant. The truth and scoring rules cannot be supplied solely by the implementation under evaluation.
-
-**Does not count:** a selected list of successful corruptions, aggregate accuracy alone, output-derived expectations, a committed hash described as proof of secrecy, caught-only latency described as overall latency, omitted held-out attempts, or a harness that succeeds after detector output disappears. Honest misses remain in the report; a surface is present even when the measured result blocks certification.
-
-**Inventory detection:** require the report headings, protocol, access and output-lock records, commitment references, complete per-instance result schema, cohort bindings, and evaluator-mutant receipts. Recompute simple report totals from the committed event-level results, including all eligible and censored cases. Inspect declared commit ancestry and version references without executing sibling code. Static inspection cannot certify that no person saw an answer key.

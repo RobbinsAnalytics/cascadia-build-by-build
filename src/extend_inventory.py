@@ -18,7 +18,8 @@ def outputs():
     ext=read(prov['extension']['path'])
     assert sha(prov['extension']['path'])==prov['extension']['sha256'], 'Extension bytes differ from provenance'
     catalog=read('governance/surface-catalog.json')
-    assert [s['number'] for s in catalog]==list(range(1,17))
+    assert [s['number'] for s in catalog]==list(range(1,16))
+    assert all(s['id']!='detection_evaluation' for s in catalog)
     assert len(baseline)==10 and all(len(b['surfaces'])==14 for b in baseline)
     rows=[]; cells={}
     for old in baseline:
@@ -37,11 +38,10 @@ def outputs():
     assert all(set(r['surfaces'])=={s['id'] for s in catalog} for r in rows)
     for s in catalog:
         c=cells[ext['row']['key']][s['id']]
-        assert c['state'] in ['recorded','limited']
+        assert c['state'] in ['recorded','limited','not_applicable']
         assert c['path']==ext['row']['surfaces'][s['id']]
         assert len(c['sha256'])==64 and c['source_commit']==ext['source_commit']
-    assert cells['cascadia-claim-integrity']['detection_evaluation']['state']=='limited'
-    assert cells['cascadia-claim-integrity']['scheduled_run_with_health']['state']=='limited'
+    assert cells['cascadia-claim-integrity']['scheduled_run_with_health']['state']=='not_applicable'
     rederive=cells['cascadia-claim-integrity']['independent_rederivation']
     assert (rederive['state']=='recorded') == (rederive['result']=='pass')
     rows.sort(key=lambda r:r['first_commit'])
@@ -53,5 +53,5 @@ def main():
             assert p.exists() and p.read_bytes()==raw, name+' differs; regenerate extension'
         else:
             p.parent.mkdir(parents=True,exist_ok=True); p.write_bytes(raw)
-    print('Additive inventory: 11 builds, 16 columns; 140 baseline cells preserved; 20 new legacy cells not assessed.')
+    print('Current inventory: 11 builds, 15 columns; 140 baseline cells preserved; 10 new legacy cells not assessed. Detection evaluation is build forward only.')
 if __name__=='__main__': main()

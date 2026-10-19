@@ -14,21 +14,23 @@ def main():
         current=by_key[original['key']]
         assert all(current[k]==v for k,v in original.items() if k!='surfaces')
         assert all(current['surfaces'][k]==v for k,v in original['surfaces'].items())
-        for key in ['expected_event_accounting','detection_evaluation']:
+        for key in ['expected_event_accounting']:
             assert current['surfaces'][key] is None
             assert cells[original['key']][key]['state']=='not_assessed'
     index=ROOT/'docs/index.html';before=index.read_bytes()
     subprocess.run([sys.executable,str(ROOT/'src/build_expanded_page.py')],check=True)
     assert index.read_bytes()==before,'Rendered page was stale'
     text=index.read_text(encoding='utf-8')
-    assert text.count('class="cell ')==176
-    assert 'effectiveness of the final controls is claimed' in text
+    assert text.count('class="cell ')==165
+    assert 'data-surface="detection_evaluation"' not in text
+    assert 'id="definition-detection_evaluation"' not in text
+    assert 'id="build-forward"' in text
     ext=read('governance/claim-integrity-extension.json')
-    assert 'not assessed' in text and ('chart review result is '+ext['cells']['chart_review']['result']) in text
+    assert 'not assessed' in text and ext['cells']['chart_review']['result']=='pass'
     assert ext['source_commit'] in text
     for name in ['builds.json','builds-expanded.json','cell-evidence.json','standard.json']:
         assert (ROOT/'docs/reference'/name).read_bytes()==(ROOT/'data'/name).read_bytes()
-    for name in ['surfaces.md','extension-provenance.json','surface-catalog.json','claim-integrity-extension.json']:
+    for name in ['surfaces.md','build-forward.md','extension-provenance.json','surface-catalog.json','claim-integrity-extension.json']:
         assert (ROOT/'docs/reference'/name).read_bytes()==(ROOT/'governance'/name).read_bytes()
-    print('PASS: additive provenance, 140 original cells, 20 not-assessed cells, 176 rendered cells, deterministic page and reference bytes.')
+    print('PASS: provenance, 140 original cells, 10 not-assessed cells, 165 rendered cells, N/A run health, build-forward-only evaluation, deterministic page and reference bytes.')
 if __name__=='__main__': main()

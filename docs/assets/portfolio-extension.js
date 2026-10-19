@@ -6,7 +6,7 @@
   const build = document.getElementById('build-filter');
   const group = document.getElementById('group-filter');
   const panel = document.getElementById('evidence-detail');
-  const stateNames = {recorded:'Artifact recorded', limited:'Limited evidence', absent:'Not carried in baseline', not_assessed:'Not assessed'};
+  const stateNames = {recorded:'Artifact recorded', limited:'Limited evidence', absent:'Not carried in baseline', not_assessed:'Not assessed', not_applicable:'Not applicable'};
   const node = (tag, text, className) => {
     const el = document.createElement(tag); el.textContent = text;
     if (className) el.className = className;
