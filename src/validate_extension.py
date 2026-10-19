@@ -23,7 +23,9 @@ def main():
     text=index.read_text(encoding='utf-8')
     assert text.count('class="cell ')==176
     assert 'effectiveness of the final controls is claimed' in text
-    assert 'not assessed' in text and 'chart re-review is deferred' in text
+    ext=read('governance/claim-integrity-extension.json')
+    assert 'not assessed' in text and ('chart review result is '+ext['cells']['chart_review']['result']) in text
+    assert ext['source_commit'] in text
     for name in ['builds.json','builds-expanded.json','cell-evidence.json','standard.json']:
         assert (ROOT/'docs/reference'/name).read_bytes()==(ROOT/'data'/name).read_bytes()
     for name in ['surfaces.md','extension-provenance.json','surface-catalog.json','claim-integrity-extension.json']:

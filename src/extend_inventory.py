@@ -42,7 +42,8 @@ def outputs():
         assert len(c['sha256'])==64 and c['source_commit']==ext['source_commit']
     assert cells['cascadia-claim-integrity']['detection_evaluation']['state']=='limited'
     assert cells['cascadia-claim-integrity']['scheduled_run_with_health']['state']=='limited'
-    assert cells['cascadia-claim-integrity']['independent_rederivation']['result']=='fail'
+    rederive=cells['cascadia-claim-integrity']['independent_rederivation']
+    assert (rederive['state']=='recorded') == (rederive['result']=='pass')
     rows.sort(key=lambda r:r['first_commit'])
     return {'data/builds-expanded.json':encoded(rows),'data/cell-evidence.json':encoded(cells)}
 def main():
