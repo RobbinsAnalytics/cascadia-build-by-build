@@ -10,9 +10,9 @@
   },
   "extension": {
     "path": "governance/claim-integrity-extension.json",
-    "sha256": "06da7052c7032d722a59b42e9cf44b05ef8cf3dcc117476f1bdd9db71b4ae4f1",
+    "sha256": "3ace20d9794d0f8e9d6d7015d67c068eaa93f0070f6b7a1441a1fc315a4d6ebd",
     "source_repository": "cascadia-claim-integrity",
-    "source_commit": "04133eefca93fc9162360c6a198216c7bbec531f",
+    "source_commit": "9e21fc7efa3978956e17a369cfd0c9f3755874f3",
     "prepared_on": "2026-10-19"
   },
   "prior_build_new_columns": "not_assessed",
