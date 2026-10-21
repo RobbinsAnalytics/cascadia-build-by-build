@@ -33,7 +33,7 @@ def main():
         cols=[]
         for s in ordered:
             c=cells[key][s['id']]; state=c['state']; label=f'{short}: {s["label"]}. {names[state]}. Result: {c["result"]}. {c["summary"]}'
-            href=c.get('href') if state not in ('not_applicable','not_assessed','absent') else None
+            href=c.get('href') if state not in ('not_assessed','absent') else None
             attrs=f'class="cell {state}" data-build="{key}" data-surface="{s["id"]}" aria-label="{esc(label)}" title="{esc(label)}"'
             mark=f'<a href="{esc(href)}" {attrs}>{symbols[state]}</a>' if href else f'<span {attrs} tabindex="0" role="img">{symbols[state]}</span>'
             cols.append(f'<td data-group="{s["group"]}">{mark}</td>')

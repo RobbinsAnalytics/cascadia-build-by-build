@@ -106,7 +106,7 @@
     }
   ],
   "links": {
-    "checked": 84,
+    "checked": 85,
     "github": 70,
     "sourceTargetsExact": true,
     "pointer": "https://github.com/RobbinsAnalytics/manufacturing-analytics/blob/main/scripts/run_phase1.ps1",
@@ -182,8 +182,9 @@
     }
   },
   "source_sha256": {
-    "src\\build_expanded_page.py": "a8116c4522ec32576e553caa5a5674be241aee07b009eca9824f7aa576a34523",
+    "src\\build_expanded_page.py": "eb839037ba4c3d515629adfe79f0de0ecd1360aee6e6d510873d31094d998792",
     "docs\\assets\\portfolio-extension.css": "fbaee026082174cefae16b948316326e8349972e4004e091ddedc4263260a0eb",
     "docs\\assets\\portfolio-extension.js": "600513070dbe81506a6f185aabcae0742b6be4d02b07e19e00feb2a2eaf924c9"
-  }
+  },
+  "scope_link": "The N/A cell opens its supplied scope-policy artifact; N/A remains distinct from pass. Cells without supplied links remain unlinked."
 }
