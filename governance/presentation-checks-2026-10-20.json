@@ -1,0 +1,190 @@
+{
+  "desktop": [
+    {
+      "viewport": [
+        1280,
+        800
+      ],
+      "matrix": {
+        "x": 164,
+        "y": 100.109375,
+        "width": 1096,
+        "height": 567.796875,
+        "bottom": 667.90625
+      },
+      "internalOverflow": false,
+      "pageOverflow": false,
+      "allRows": 11,
+      "allColumns": 15,
+      "headerTop": 0,
+      "indexTop": 103.390625,
+      "overlongHeaders": []
+    },
+    {
+      "viewport": [
+        1440,
+        900
+      ],
+      "matrix": {
+        "x": 164,
+        "y": 99.609375,
+        "width": 1256,
+        "height": 567.796875,
+        "bottom": 667.40625
+      },
+      "internalOverflow": false,
+      "pageOverflow": false,
+      "allRows": 11,
+      "allColumns": 15,
+      "headerTop": 0,
+      "indexTop": 103.390625,
+      "overlongHeaders": []
+    },
+    {
+      "viewport": [
+        1920,
+        1080
+      ],
+      "matrix": {
+        "x": 210,
+        "y": 100.46875,
+        "width": 1678,
+        "height": 604.0625,
+        "bottom": 704.53125
+      },
+      "internalOverflow": false,
+      "pageOverflow": false,
+      "allRows": 11,
+      "allColumns": 15,
+      "headerTop": 0,
+      "indexTop": 103.390625,
+      "overlongHeaders": []
+    }
+  ],
+  "navigation": [
+    {
+      "id": "overview",
+      "header": 0,
+      "index": 103.390625,
+      "active": "#overview"
+    },
+    {
+      "id": "matrix",
+      "header": 0,
+      "index": 103.390625,
+      "active": "#matrix"
+    },
+    {
+      "id": "new",
+      "header": 0,
+      "index": 103.390625,
+      "active": "#new"
+    },
+    {
+      "id": "definitions",
+      "header": 0,
+      "index": 103.390625,
+      "active": "#definitions"
+    },
+    {
+      "id": "limits",
+      "header": 0,
+      "index": 103.390625,
+      "active": "#limits"
+    },
+    {
+      "id": "build-forward",
+      "header": 0,
+      "index": 103.390625,
+      "active": "#build-forward"
+    },
+    {
+      "id": "provenance",
+      "header": 0,
+      "index": 103.390625,
+      "active": "#provenance"
+    }
+  ],
+  "links": {
+    "checked": 85,
+    "github": 70,
+    "sourceTargetsExact": true,
+    "pointer": "https://github.com/RobbinsAnalytics/manufacturing-analytics/blob/main/scripts/run_phase1.ps1",
+    "enter": "https://github.com/RobbinsAnalytics/manufacturing-analytics/blob/main/scripts/run_phase1.ps1"
+  },
+  "mobile": [
+    {
+      "width": 320,
+      "before": {
+        "rowX": 21,
+        "headY": 30.515625
+      },
+      "after": {
+        "rowX": 21,
+        "headY": 30.515625,
+        "scroll": [
+          500,
+          108
+        ],
+        "pageOverflow": false
+      }
+    },
+    {
+      "width": 390,
+      "before": {
+        "rowX": 21,
+        "headY": 30.625
+      },
+      "after": {
+        "rowX": 21,
+        "headY": 30.625,
+        "scroll": [
+          500,
+          108
+        ],
+        "pageOverflow": false
+      }
+    },
+    {
+      "width": 768,
+      "before": {
+        "rowX": 21,
+        "headY": 31.328125
+      },
+      "after": {
+        "rowX": 21,
+        "headY": 31.328125,
+        "scroll": [
+          359,
+          48
+        ],
+        "pageOverflow": false
+      }
+    }
+  ],
+  "scope": "Local Chromium presentation verification; no new analytical assurance or publication approval.",
+  "checks": [
+    "extend_inventory.py --check",
+    "validate_extension.py",
+    "validate_freeze.py",
+    "hook_test_matrix.py: 51/51"
+  ],
+  "preservation": "No data, catalog, extension provenance or frozen baseline changes.",
+  "destinations": {
+    "historical_github": {
+      "url": "https://github.com/RobbinsAnalytics/manufacturing-analytics/blob/main/scripts/run_phase1.ps1",
+      "http_status": 200
+    },
+    "claim_integrity_expected_events": {
+      "url": "https://www.robbinsanalytics.com/cascadia-claim-integrity/evidence/expected-event-accounting.md",
+      "http_status": 200,
+      "note": "Inventory supplies this public snapshot URL, not a GitHub URL; preserved exactly."
+    }
+  },
+  "source_sha256": {
+    "src\\build_expanded_page.py": "eb839037ba4c3d515629adfe79f0de0ecd1360aee6e6d510873d31094d998792",
+    "docs\\assets\\portfolio-extension.css": "fbaee026082174cefae16b948316326e8349972e4004e091ddedc4263260a0eb",
+    "docs\\assets\\portfolio-extension.js": "600513070dbe81506a6f185aabcae0742b6be4d02b07e19e00feb2a2eaf924c9"
+  },
+  "scope_link": "The N/A cell opens its supplied scope-policy artifact; N/A remains distinct from pass. Cells without supplied links remain unlinked."
+}
